@@ -1,0 +1,191 @@
+{
+  "Miner": "t01475",
+  "Ticket": {
+    "VRFProof": "shTEDyBCkLmYS+1zmGBF3K/hbAfZ3oA9aWLx9ufabfjHLu6cVnMLUd1fQ/q45BwBBt2QcsqjZTSODNqyyIa+Hiswfs3k8c+VMhgfycfTGvfp5MQ45MdD2GeuNu4chY3B"
+  },
+  "EPostProof": {
+    "Proof": "r0Rfvj0OQIfSQ0KIRuua6vFFtD+UjlY9wh5guzH3asuJH9DKStHS50092DT8aTxnhYpv6XMdO+eY8a75ZFu6iLAvK/59kOF0TrmwWTW0zzYepb8YgSYYE3cJU8dLgyg4CIDSkfaLGJHLiCj9SFF7g5sKgRokocHRB7WgO3DOKElMNuzRUHRYvjwCvwlQh3MOkFEh3iEhrKDTrWywd6eL8kaop+qw2JQtUctPpexlKw6Y0PqbNmAeeP3dNr1oxsqQ",
+    "PostRand": "gzpe51fBHl2UJ93MQ8l5dPslSSpNkBdgEMeaNeNbdrw6Xouaqe2SYgFa2NP/B1C5EUAweBTIW5JoNQEt3eXNkIRXRvKOMgNpuFoC4I6B0mul7l6wk+PhcpROTAEiFJKv",
+    "Candidates": [
+      {
+        "Partial": "PN11BGgXHAoWL5N4PF+6kBdMa3WBZN2xsctFwaXmiRU=",
+        "SectorID": 12716,
+        "ChallengeIndex": 150
+      }
+    ]
+  },
+  "Parents": [
+    {
+      "/": "bafy2bzacebxc3ehl4glv24dqfx7qg2q7sax7elbsxti45b5tl5lwkvuzqvcn4"
+    }
+  ],
+  "ParentWeight": "314017348",
+  "Height": 26549,
+  "ParentStateRoot": {
+    "/": "bafy2bzaceck7u5tka6oiq4ycjsyup6aonnnzycqsxf6betlmgv2gaki4hagqk"
+  },
+  "ParentMessageReceipts": {
+    "/": "bafy2bzacedstg6kkksbxno62nhdsf2gqhbvbfvjkfpb6td4vjsor3pkdlc5pu"
+  },
+  "Messages": {
+    "/": "bafy2bzacebjexzhudfjo467hfpplws7mt7ifenuafh3pd2velyigvbycxmd2a"
+  },
+  "BLSAggregate": {
+    "Type": "bls",
+    "Data": "s1xfHZNvmE9C/HiYrfv6ey5t9pBBg2uyLCCtWvYhH/QGfX6hAdbjMzs99xZbI3VYBaKczRvWPTSOBmhy1oRPcc+ExShKTs813TOs4kfHpJiKl0Pho0en9FYAme4Y7F6b"
+  },
+  "Timestamp": 1577280105,
+  "BlockSig": {
+    "Type": "bls",
+    "Data": "pVyTCDP22WxxlSKQtn6y30ZWQAW2hxaYS+L3wRBfjGTfAYd08mhcrqFOcOhV7tC5E4VPa6Qa8kVTuPHpbP8Yxm6nxAUIxkXQM5taWtGMhv2SfYYnMBn+9JIpm2NE0PnQ"
+  },
+  "BlsMessages": [
+    {
+      "To": "t06040",
+      "From": "t3rw754pd4tfdwgjsj5mcrft3umdiqchs7ldemsi7lp76dy7bywlkfghr7op4kpo4vr2gqgxwzx2gwybp2wtxq",
+      "Nonce": 6873,
+      "Value": "0",
+      "GasPrice": "0",
+      "GasLimit": "100000000",
+      "Method": 14,
+      "Params": "gXgmACQIARIgfNwIm42VEa+JGqt4LXg8S3bXbXvTYkUBYiXlkNZhRfk="
+    },
+    {
+      "To": "t03",
+      "From": "t3xfhadzqbznbn4doupewddhneh33pveg75th7c27qdwcf5ztvek3bqoo6lfc2kp6bo3znzgpbctzr6o7aexea",
+      "Nonce": 145,
+      "Value": "0",
+      "GasPrice": "0",
+      "GasLimit": "1000000",
+      "Method": 5,
+      "Params": "gYGJWCD8vurM8xbSKf6nsUryxE+G8yTdS1+HkQ2JOWuGqk8NDxo/gAAAWDEDuU4B5gHLQt4N1HksMZ2kPvb6kN/sz/Fr8B2EXuZ1IrYYOd5ZRaU/wXby3JnhFPMfQwDPLBv//////////xt//////////0BAWGECi19/vi+CkxH/7ysXD5pxQkkGgwnZqw9eOcsu4H+xcdNQPL/BF+nxqHotbBKyNB0ZDbL3fsz2cRfz5gvHxrxOnRYO8rUwvMzMhDd5cyXd8kTTg5EXIA2UZB6O7WCngstL"
+    },
+    {
+      "To": "t03",
+      "From": "t3xfhadzqbznbn4doupewddhneh33pveg75th7c27qdwcf5ztvek3bqoo6lfc2kp6bo3znzgpbctzr6o7aexea",
+      "Nonce": 146,
+      "Value": "0",
+      "GasPrice": "0",
+      "GasLimit": "1000000",
+      "Method": 5,
+      "Params": "gYGJWCD8vurM8xbSKf6nsUryxE+G8yTdS1+HkQ2JOWuGqk8NDxo/gAAAWDEDuU4B5gHLQt4N1HksMZ2kPvb6kN/sz/Fr8B2EXuZ1IrYYOd5ZRaU/wXby3JnhFPMfQwDPLBv//////////xt//////////0BAWGECi19/vi+CkxH/7ysXD5pxQkkGgwnZqw9eOcsu4H+xcdNQPL/BF+nxqHotbBKyNB0ZDbL3fsz2cRfz5gvHxrxOnRYO8rUwvMzMhDd5cyXd8kTTg5EXIA2UZB6O7WCngstL"
+    },
+    {
+      "To": "t03",
+      "From": "t3ua2ugloa4b7fx2cyo4eicoxwjbca4gvtnbtc3p7d47tiegg4qerbfn4c3sgulsxn5ogtchw7bxqoonvwcl4a",
+      "Nonce": 368,
+      "Value": "0",
+      "GasPrice": "0",
+      "GasLimit": "1000000",
+      "Method": 5,
+      "Params": "gYGJWCAnjzoTtYRd3BKKfw7zh1eBmwYCTQJ9J7cMSkbYS4tCDxo/gAAAWDEDjrIpHnWwT2bdXfQykn2W8kPMnoL8uFZmrQIRIeX++iAPqC5s8imnmoyyymlOgQkgQwCtLRv//////////wpFAB3NZQBFAD+AAABYYQKDkLcVbquTyg7iQUtP5kitLU6FGMGFOM8f0LpOCQNYw8wQRoJPcsDjhOHTlCmPg80KIUNoCSmuZscaKiRBoC6crq/z5jXfLIOes/7CqfSZFUi6VhyRFymF6CWu2qgJpec="
+    },
+    {
+      "To": "t03",
+      "From": "t3ua2ugloa4b7fx2cyo4eicoxwjbca4gvtnbtc3p7d47tiegg4qerbfn4c3sgulsxn5ogtchw7bxqoonvwcl4a",
+      "Nonce": 369,
+      "Value": "0",
+      "GasPrice": "0",
+      "GasLimit": "1000000",
+      "Method": 3,
+      "Params": ""
+    },
+    {
+      "To": "t03",
+      "From": "t3rq3nb6h23ngj7znjiuzurvkbktkce5vr3rhrgr2eromu6xhjg4xygpm2xto6ogkxb2t5jarhuzukic5twzba",
+      "Nonce": 1944,
+      "Value": "5000000000",
+      "GasPrice": "0",
+      "GasLimit": "1000000",
+      "Method": 3,
+      "Params": ""
+    },
+    {
+      "To": "t06241",
+      "From": "t3v5dkehfu7wnewlpf62idepmsotywsvxod35hhnxfqv6e5jcsmorjzgnbwsorwumfhhc5byz3tv26grlcclfa",
+      "Nonce": 3076,
+      "Value": "0",
+      "GasPrice": "1",
+      "GasLimit": "1000000",
+      "Method": 3,
+      "Params": "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"
+    }
+  ],
+  "SecpkMessages": [],
+  "ParentReceipts": [
+    {
+      "ExitCode": 2,
+      "Return": "",
+      "GasUsed": "1000000"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "24654"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "24672"
+    },
+    {
+      "ExitCode": 2,
+      "Return": "",
+      "GasUsed": "1000000"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "12339"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "gYEaAAkuvA==",
+      "GasUsed": "56467"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "35548"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "968"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "11278"
+    }
+  ],
+  "ParentMessages": [
+    {
+      "/": "bafy2bzacea4siun7gngecomuktgqlyk4yy6jsxbte72swe2oczwvtqkhhvghg"
+    },
+    {
+      "/": "bafy2bzaceamf37b5nifimvehmth4pwq22mqfv4b2l7boor4m4xacq47hn2tf4"
+    },
+    {
+      "/": "bafy2bzacebe6h5k74hpigpecjdiipr5jccpotefht5ib7ldveiukohkw63ybi"
+    },
+    {
+      "/": "bafy2bzacecy6qpnpa3ri6yhxkonyj2zvdmoo2pmr4cmzfb47fylb2py4ryhhg"
+    },
+    {
+      "/": "bafy2bzacecniipwiuo4xwvfajwphrvmq3kab4yvryczcbjxffsdxehymxofa6"
+    },
+    {
+      "/": "bafy2bzacecvtyaz4screexbvsgl66tgacpdhvjww4ypxjd5wv4dhvetbmfjma"
+    },
+    {
+      "/": "bafy2bzacecq6zgcxat4hwrx3gecnzkxnwydscfkc4e64nqhbixoveuztxqneq"
+    },
+    {
+      "/": "bafy2bzacea444j7p64gxyholfrp4fr3wzzjqfyt5zzs6gyfdfisabnmojc7i4"
+    },
+    {
+      "/": "bafy2bzaceco4jwj5e63x5cj2gg2mjjf2ulglrnhqzmavis4ysu4gxe476duqu"
+    }
+  ]
+}

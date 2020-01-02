@@ -1,0 +1,187 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    首页
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<ol class="breadcrumb bm">
+			<li>
+				<a href="{% url 'homepage' %}">首页</a>
+			</li>
+			<li>块 - {{ ablock.hash }}
+			</li>
+		</ol>
+	</div>
+	<div class="row">
+			<div class="panel panel-bm blockAbstract">
+				<div class="panel-heading">
+					<div class="panel-heading-title">
+						摘要
+					</div>
+				</div>
+				<div class="panel-body text-center">
+					<div class="blockAbstract-inner">
+						<div class="blockAbstract-section">
+							<dl>
+								<dt>
+									高度
+								</dt>
+								<dd>
+									{{ ablock.height }}
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										确认数
+								</dt>
+								<dd>
+									3
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										大小
+								</dt>
+								<dd>
+									1,107,229 <span class="text-muted">Bytes</span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										Stripped Size
+								</dt>
+								<dd>
+									962,141 <span class="text-muted">Bytes</span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										Weight
+								</dt>
+								<dd style="margin-right: 38px;">
+									3,993,652
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										数量
+								</dt>
+								<dd>
+									1,412
+								</dd>
+							</dl>
+						</div>
+						<div class="blockAbstract-section">
+							<dl>
+								<dt>
+										版本
+								</dt>
+								<dd>
+									0x3fffc000
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										难度
+								</dt>
+								<dd>
+									107.12 <span class="text-muted">T</span> / 12.95 <span class="text-muted">T</span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										Bits
+								</dt>
+								<dd class="text-monospace">
+									0x1715bcd0
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										Nonce
+								</dt>
+								<dd class="text-monospace">
+									0x80aec8de
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										矿工
+									</dt>
+								<dd>
+									<a href="https://btc.com/stats/pool/Poolin">{{ ablock.miner }}</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+										时间
+								</dt>
+								<dd class="-btc-time-localization" data-btccom-timestamp="1577625480" data-toggle="tooltip" title="" data-original-title="UTC: 2019-12-29 13:18:00">
+									{{ ablock.timestamp }}
+								</dd>
+							</dl>
+						</div>
+						<div class="blockAbstract-section blockAbstract-section-smallsize" >
+							<dl>
+								<dt>
+										块哈希
+								</dt>
+								<dd>
+									<a href="#" ga-type="block" ga-target="from block">{{ ablock.hash }}</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt class="blockRussianWordBreak">
+										前一个块
+								</dt>
+								<dd>
+									<a href="https://btc.com/0000000000000000001577876112d6349e7f5b358e5d53fe4c36800169f2cd24" ga-type="block" ga-target="from block">0000000000000000001577876112d6349e7f5b358e5d53fe4c36800169f2cd24</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt class="blockRussianWordBreak">
+										后一个块
+								</dt>
+								<dd>
+									<a href="https://btc.com/000000000000000000093f9b778c8b320aa14d67d705952aa7f4ff176ff2f780" ga-type="block" ga-target="from block">000000000000000000093f9b778c8b320aa14d67d705952aa7f4ff176ff2f780</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt class="blockRussianWordBreak">
+										Merkle Root
+								</dt>
+								<dd class="text-muted">
+									dc4a94ce9d060f4c946aeb81eb575b7b06a75ba035e4129dc33f033289160381
+								</dd>
+							</dl>
+							<dl>
+								<dd class="text-left">
+									&nbsp;
+								</dd>
+							</dl>
+							<dl>
+								<dt class="blockRussianWordBreak">
+										其它区块浏览器
+								</dt>
+								<dd>
+									<a target="_blank" href="https://github.com/filecoin-project/filecoin-explorer">BLOCKCHAIR</a>
+								</dd>
+							</dl>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

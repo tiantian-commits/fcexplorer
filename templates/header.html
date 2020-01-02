@@ -1,0 +1,60 @@
+
+<header class="header">
+    <div class="header-layer-container" style="display:none">
+        <a href="https://btc.com/#" target="_blank" rel="noopener noreferrer">
+            <div class="header-layer-container-inner">
+                <div class="header-layer-close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="logo">
+                <div class="logo-inner">
+                    <a href="https://filecoin.io" class="text-hide logo-link">FileCoin区块浏览器</a>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="#" target="_blank">矿工</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" target="_blank">钱包</a>
+                    </li>
+					<li class="nav-item">
+					  <a href="{% url 'block:block_list' %}">区块</a>    
+					</li>
+					<li class="nav-item">
+					  <a href="#">统计</a>    
+					</li>
+					<li class="nav-item">
+					  <a href="#">工具</a>  
+					</li>
+					<li class="nav-item">
+					  <a href="#">应用</a>  
+					</li>
+					<li class="nav-item">
+					  <a style="font-weight: bold;" href="https://filecoin.io/"> FileCoin </a>
+					</li>
+                </ul>
+            </nav>
+
+            <div class="searchbar">
+                <div class="searchbar-inner">
+                    <form action="{% url 'block:block_list' %}" method="GET" class="searchbar-form clearfix" onsubmit="this.search.value = this.search.value.trim()">
+                        <button class="searchbar-submit" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        <div class="searchbar-input-container">
+                            <input type="search" class="searchbar-input" name="search" placeholder="地址、高度或哈希..." autocomplete="off" onfocus="$(this).addClass(&#39;active&#39;)" onblur="this.value.length &gt; 1 || $(this).removeClass(&#39;active&#39;)">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

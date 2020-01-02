@@ -1,0 +1,191 @@
+{
+  "Miner": "t01475",
+  "Ticket": {
+    "VRFProof": "tFUcYp2S6/RvEUKAbcEKJG8IOZXZfleUOvN7ZGbODerPcPHvo/+VzxajA44YgQPAEfX7zsqSyNTx9Au9IC30HJHNTd4ujEBF1hGydnEudkIxI752PALeXgAawDD2XKT0"
+  },
+  "EPostProof": {
+    "Proof": "ihMwbDZv0qVkAnSEq2IMrUQrZl2GqJrNLNSsNaaJc+EuyjIiase6swHTjQKEg1Odlq8D3siw3Mlx6NvDSJFSfVwxepvs5EOINRRhUzozByKL/U6hu92jWsi2v2JHIM0ABi8KIvZHbeUxSBXbUWCg8806wTy8hUnNq7LevpeQlYEtUc6uKPBVx+6/H2IOJvAoqkI7DECL3ZyZXh9cgWaLVuPOX+zTSSD8i+yKGdAc26Hm/RTER/60w/qZjxGzctIe",
+    "PostRand": "uQxh3eDz7iN3nCIwiv9dOv/E5jhme5b54oB9khih+1f2MVIvPyKPGX62uae82X55AbBXZDixU2jhB1iEiuUa4vtsyLFoKHwTvgEdvgL0yS3H4bwDvO1bErCWUhwJVBda",
+    "Candidates": [
+      {
+        "Partial": "QwVHdSgnLjVORCR2fXy5ylCX3TC6FaImZRffaWcahGI=",
+        "SectorID": 13518,
+        "ChallengeIndex": 49
+      }
+    ]
+  },
+  "Parents": [
+    {
+      "/": "bafy2bzaceaavzhlybhikylznsr4qnllejetn2eimlhej33gogpyteaqa42e2o"
+    }
+  ],
+  "ParentWeight": "313763908",
+  "Height": 26521,
+  "ParentStateRoot": {
+    "/": "bafy2bzaceda5coa6mjezyczlgifdza2j2sojhavsiwrugt733b6sdnrlksitc"
+  },
+  "ParentMessageReceipts": {
+    "/": "bafy2bzaced4onrsxh27le6linees6drgy5eotwt77tdup2yoqybkulmkrjkhc"
+  },
+  "Messages": {
+    "/": "bafy2bzacebw2gntkfgvg4him2pmomfdpa6qghl2gdcxtniektljkf6ljow5ew"
+  },
+  "BLSAggregate": {
+    "Type": "bls",
+    "Data": "qjnNpetsqL53O0cC6ZfmvYzcwygsfVPLHYY08lGqiW3KQIWsfEiSGvgPyE55DQEsEbsfNr6le+fv6pbI1nk1T+Wg9GnE3iGxNELkSbNxX6KJqv9h3+kaEYkmtSRDp/NL"
+  },
+  "Timestamp": 1577278845,
+  "BlockSig": {
+    "Type": "bls",
+    "Data": "koRTovAqzbE3brQeWyARvEzun+/X42iJiHbr/xUxm3SoZ6p8QfX+ctciKEKHDs+TEGbYKOa5xqzYOKlcWQdr//dr6sNvwg/0yVLb8ATtw9lu3WGkfGjGFPOkYmcYlz8c"
+  },
+  "BlsMessages": [
+    {
+      "To": "t02559",
+      "From": "t3spcznz4tnosolwxdqu345d5mj32z3kg2xwjijqbc73paxnf6yljevqcdmnbvxprbdlkzitlmqyoog6mz6lra",
+      "Nonce": 567,
+      "Value": "0",
+      "GasPrice": "1",
+      "GasLimit": "10000000",
+      "Method": 18,
+      "Params": "gUJQAg=="
+    },
+    {
+      "To": "t06177",
+      "From": "t3welyfukvhxhuyspu6jq7o6npifvszhe7jmn4hc7padqxxjrioq5uor34dlwwqwd3bfwnozzmbxnlypvqjpza",
+      "Nonce": 1256,
+      "Value": "0",
+      "GasPrice": "1",
+      "GasLimit": "1000000",
+      "Method": 2,
+      "Params": "hAZYIOyOnQ5aPbrPAvV4Qw2nN1tqOPsKcwmA3Kf4OddBfT4DGWc3gRoACP6C"
+    },
+    {
+      "To": "t03",
+      "From": "t3ua2ugloa4b7fx2cyo4eicoxwjbca4gvtnbtc3p7d47tiegg4qerbfn4c3sgulsxn5ogtchw7bxqoonvwcl4a",
+      "Nonce": 341,
+      "Value": "0",
+      "GasPrice": "0",
+      "GasLimit": "1000000",
+      "Method": 5,
+      "Params": "gYGJWCAu0v1ji4G6D0GzBvcu6uK306WoA5+3VqJtPeXx8FTFJRo/gAAAWDEDjDbQ+PrbTJ/lqUUzSNVBVNQidrHcTxNHRIuZT1zpNy+DPZq83ecZVw6n1IInpmikQwCtLRv//////////wpFAB3NZQBFAD+AAABYYQK06GrhwP5lPJeIUnoH2KyzHHk+lAGQgfwhAPKfURjS/9221Z0o4kZnOxzAX77xokUBaoHOiCnIv3NNFWE3tP3pk010g2BTlIrz5Wd0GhRayUM922JfqX6VSgQ8OOLisoM="
+    },
+    {
+      "To": "t03",
+      "From": "t3r2zcshtvwbhwnxk56qzje7mw6jb4zhuc7s4fmzvnaiisdzp67iqa7kbontzctj42rszmu2koqeesbjiujuwa",
+      "Nonce": 523,
+      "Value": "0",
+      "GasPrice": "0",
+      "GasLimit": "1000000",
+      "Method": 3,
+      "Params": ""
+    },
+    {
+      "To": "t03042",
+      "From": "t3wjb3heokb67zy45rr4xemkh2mfosaogqa2dfcgkaxrtnus5o55aj2ncmji3nin4xkawroxgtgvwx7gkatrha",
+      "Nonce": 633,
+      "Value": "0",
+      "GasPrice": "1",
+      "GasLimit": "10000000",
+      "Method": 18,
+      "Params": "gUEY"
+    },
+    {
+      "To": "t06297",
+      "From": "t3vtqskvjy2nryphkwqxxg5uoak53k3i4soqrn4db56ka3wtc5vhynrmrqzuzyngfmfqtlyam6kz5vgksgop7a",
+      "Nonce": 580,
+      "Value": "0",
+      "GasPrice": "1",
+      "GasLimit": "1000000",
+      "Method": 3,
+      "Params": "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"
+    },
+    {
+      "To": "t04981",
+      "From": "t3wenqk54spplgyoxjhhnooodwddo2lh3hnhw6h5qebnv4hkw5kxe6ssfakdn63um5h4rj5rmykqtzraee4k6a",
+      "Nonce": 517,
+      "Value": "0",
+      "GasPrice": "1",
+      "GasLimit": "10000000",
+      "Method": 18,
+      "Params": "gUqoOVLlcT2oWrUO"
+    }
+  ],
+  "SecpkMessages": [],
+  "ParentReceipts": [
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "3686"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "26596"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "332105"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "gYEaAAks0A==",
+      "GasUsed": "57232"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "48696"
+    },
+    {
+      "ExitCode": 5,
+      "Return": "",
+      "GasUsed": "1000000"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "2949"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "48574"
+    },
+    {
+      "ExitCode": 0,
+      "Return": "",
+      "GasUsed": "44707"
+    }
+  ],
+  "ParentMessages": [
+    {
+      "/": "bafy2bzaceah2wj3s6imnbc3edgvtnenwomttahlekcvfyj422ur37tys77rdc"
+    },
+    {
+      "/": "bafy2bzaceazj5n4kzfkmcs5jwsdypjz2obkcdold6hdnvmtoqraa444i3neve"
+    },
+    {
+      "/": "bafy2bzaceczhnxs5putvaqkfkuosx6htuesr56svh7rfjqrngozsdtzo7ad76"
+    },
+    {
+      "/": "bafy2bzacedtccgsxzh6wchd5sbcrxc2ch5h73v52byeo73oxwn6lvv4calwty"
+    },
+    {
+      "/": "bafy2bzacebantu3lerjfa52bjhxpa4fkgws52epzutew2vjqzexsbonyghqwq"
+    },
+    {
+      "/": "bafy2bzacear2f4qlbmxegfsvkgu7dg6ialztunp66kmpxx46osrqjvbn3a66q"
+    },
+    {
+      "/": "bafy2bzaceda5fq22boletabfuxocn4xojx6rsvph6kgyg3zwggpfr726477ss"
+    },
+    {
+      "/": "bafy2bzaceansklhfftgfnb7dl5it44so7dbgswg2v5fagz4w2zrvv5jnxdi6o"
+    },
+    {
+      "/": "bafy2bzacedshugcjiqx5sm3gsntqnike2ovnsczumkfa7kjszzfdjvz2qajwi"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    首页
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<!-- 定义放置文章标题的div容器 -->
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'homepage' %}">
+                    首页
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+               <a href="{% url 'block:block_sync' %}">
+                    同步数据
+               </a>
+            </li>
+
+        </ol>
+    </nav>
+
+    <!-- 搜索栏 -->
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <form class="form-inline" action="{% url 'block:block_method_count' %}" method="GET" onsubmit="this.to.value = this.to.value.trim(),this.method.value=this.method.value.trim()" >
+				<input type="text" class="form-control mb-2 mr-sm-2" name="to" placeholder="To" >
+				<input type="text" class="form-control mb-2 mr-sm-2" name="method" placeholder="Method" >
+                <input type="submit" class="form-control mb-2 mr-sm-2" value="查询">
+            </form>
+        </div>
+    </div>
+
+	<div class="table-responsive">
+	  <table class="table" style="word-wrap:break-all; table-layout: fixed;">
+		<thead>
+		  <tr>
+			<th width="8%">高度</th>
+			<th width="55%">块哈希</th>
+			<th width="10%">矿工</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for block in blocks %}
+		  <tr>
+			<td><a href="{% url 'block:block_detail' %}?hash={{ block.hash }}">{{ block.height }}</td>
+			<td><a href="{% url 'block:block_detail' %}?hash={{ block.hash }}">{{ block.hash }}</td>
+			<td>{{ block.miner }}</td>
+		  <tr>
+		{% endfor %}
+		</tbody>
+	  </table>
+	</div>
+
+</div>
+{% endblock content %}

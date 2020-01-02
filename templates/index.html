@@ -1,0 +1,381 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    首页
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+{{ method_count_chart|safe }}
+				      
+<div class="main-body">
+	<div class="container">
+		<div class="row">
+			<div class="notification-bar"></div>
+		</div>
+
+		<div class="row">
+			<div class="panel panel-bm indexBlockList">
+				<div class="panel-heading">
+					<div class="panel-heading-title">最近出块</div>
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<tbody
+							<tr id="append">
+								<th class="text-right">高度</th>
+								<th class="text-center">矿工</th>
+								<th class="text-center">块收益</th>
+								<th class="text-right">时间</th>
+								<th class="text-center">块哈希</th>
+							</tr>
+
+		                    {% for block in blocks %}
+							<tr data-id="610,407">
+								<td class="text-right"><a href="{% url 'block:block_detail' %}?hash={{ block.hash }}" ga-type="block" ga-target="from height">{{ block.height }}</a></td>
+								<td class="text-left">
+									<i class="icon-pool icon-pool-f2pool"></i><div class="cell-poolname">
+										<a href="{% url 'block:block_detail' %}?hash={{ block.hash }}">{{ block.miner }}</a>
+									</div>
+								</td>
+								<td class="text-center indexBlockList-blockAward"><span class="text-muted">0.1 FIL</span></td>
+								<td class="text-right indexBlockList-blockTimestamp" data-timestamp="1577681055">{{ block.timestamp }}</td>
+								<td class="text-center indexBlockList-blockhash"><a href="{% url 'block:block_detail' %}" ga-type="block" ga-target="from blockhash">{{ block.hash }}</a></td>
+							</tr>
+		                    {% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+        <div class="row">
+		    <div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">
+	                    {{myechart|safe}}
+			</div>
+	    </div>
+	
+		<div class="row">
+			<div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">
+				<div class="panel panel-bm indexPoolShare">
+					<div class="panel-heading">
+						<div class="panel-heading-corner">
+							<a href="https://filecoin.io">更多<i class="icon-arrow-right"></i></a>
+						</div>
+						<div class="panel-heading-title">
+							矿工不同Method的总数
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="pool-panel pool-panel-share">
+							<table class="table table-condensed">
+								<tbody>
+								<tr>
+								    <th width="80px">矿工</th>
+								    <th width="80px">Method 3</th>
+									<th width="80px">Method 4</th>
+									<th width="80px">Method 5</th>
+								</tr>
+
+								<tr class="js-realtime-row">
+									<td style="min-width:80px;">
+										<a target="_blank" href="#">t01475</a>
+									</td>
+									<td>
+										<span class="geryColor">34</span>
+									</td>
+									<td>128</td>
+									<td>29</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">
+				<div class="panel panel-bm indexPoolShare">
+					<div class="panel-heading">
+						<div class="panel-heading-corner">
+							<a href="https://filecoin.io">更多<i class="icon-arrow-right"></i></a>
+						</div>
+						<div class="panel-heading-title">
+							矿工算力排行
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="pool-panel pool-panel-share">
+							<table class="table table-condensed">
+								<tbody>
+								<tr>
+									<th colspan="2">
+										<div class="btn-group hashrate-control-container">
+											<a href="javascript:void 0" class="btn control-btn active" data-control="js-realtime-row">实时</a>
+											<a href="javascript:void 0" class="btn control-btn" data-control="js-estimated-row">预估</a>
+										</div>
+									</th>
+									<th class="text-right" colspan="2"><span class="js-estimated-row" style="display:none">根据出块数据计算</span></th>
+									<th class="text-right" width="85px">24小时变化</th>
+									<th class="text-right" width="80px">3天幸运值</th>
+								</tr>
+
+								<tr class="js-realtime-row">
+									<td class="text-center geryColor" width="15px" style="vertical-align: middle;padding-right: 8px">
+										1
+									</td>
+									<td class="text-left" style="min-width:130px;">
+										<i class="icon-pool icon-pool-poolin"></i>
+										<a target="_blank" href="#">t01475</a>
+									</td>
+									<td width="140px">
+										<div class="progress" style="margin-bottom: 0px;">
+											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 74, 192); width: 75%;">
+											</div>
+										</div>
+									</td>
+									<td class="text-right">
+										<span class="geryColor"></span>
+									</td>
+									<td class="text-right">0.75</td>
+									<td class="text-right">75%</td>
+								</tr>
+
+								<tr class="js-realtime-row">
+									<td class="text-center geryColor" width="15px" style="vertical-align: middle;padding-right: 8px">
+										2
+									</td>
+									<td class="text-left" style="min-width:130px;">
+										<i class="icon-pool icon-pool-poolin"></i>
+										<a target="_blank" href="#">t01493</a>
+									</td>
+									<td width="140px">
+										<div class="progress" style="margin-bottom: 0px;">
+											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 74, 150); width: 42%;">
+											</div>
+										</div>
+									</td>
+									<td class="text-right">
+										<span class="geryColor"></span>
+									</td>
+									<td class="text-right">0.42</td>
+									<td class="text-right">42%</td>
+								</tr>
+
+								<tr class="js-realtime-row">
+									<td class="text-center geryColor" width="15px" style="vertical-align: middle;padding-right: 8px">
+										3
+									</td>
+									<td class="text-left" style="min-width:130px;">
+										<i class="icon-pool icon-pool-poolin"></i>
+										<a target="_blank" href="#">t01004</a>
+									</td>
+									<td width="140px">
+										<div class="progress" style="margin-bottom: 0px;">
+											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 103, 100); width: 33%;">
+											</div>
+										</div>
+									</td>
+									<td class="text-right">
+										<span class="geryColor"></span>
+									</td>
+									<td class="text-right">0.33</td>
+									<td class="text-right">33%</td>
+								</tr>
+
+								<tr class="js-realtime-row">
+									<td class="text-center geryColor" width="15px" style="vertical-align: middle;padding-right: 8px">
+										4
+									</td>
+									<td class="text-left" style="min-width:130px;">
+										<i class="icon-pool icon-pool-poolin"></i>
+										<a target="_blank" href="#">t06266</a>
+									</td>
+									<td width="140px">
+										<div class="progress" style="margin-bottom: 0px;">
+											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 150, 50); width: 13%;">
+											</div>
+										</div>
+									</td>
+									<td class="text-right">
+										<span class="geryColor"></span>
+									</td>
+									<td class="text-right">0.13</td>
+									<td class="text-right">13%</td>
+								</tr>
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-6" style="padding-right: 0; padding-left: 10px;">
+				<div class="panel panel-bm indexNetworkStats" style="height: 510px;">
+					<div class="panel-heading">
+						<div class="panel-heading-corner">
+							<a href="https://stats.testnet.filecoin.io/d/z6FtI92Zz/chain?orgId=1&refresh=45s&from=now-30m&to=now&kiosk">更多<i class="icon-arrow-right"></i></a>
+						</div>
+						<div class="panel-heading-title">网络状态</div>
+					</div>
+					<div class="panel-body">
+						<ul>
+							<li>
+								<dl>
+									<dt>全网算力</dt>
+									<dd>
+										<span> 48.7 TiB
+											<span class="v-help-vsize v-help" data-container="body" data-toggle="popover-hashrate" data-placement="left" data-html="true" data-content="最近&lt;b&gt;一天&lt;/b&gt;平均算力 94.50 EH/s&lt;br&gt;
+			最近&lt;b&gt;三天&lt;/b&gt;平均算力 96.13 EH/s&lt;br&gt;
+			最近&lt;b&gt;七天&lt;/b&gt;平均算力 92.58 EH/s&lt;br&gt;" data-original-title="" title="">
+											</span>
+										</span>
+									</dd>
+								</dl>
+							</li>
+							<li>
+								<dl>
+									<dt>
+										<a href="https://btc.com/stats/diff">
+											网络存储
+										</a>
+									</dt>
+									<dd><span class="text-muted">
+											</span>48.41 TiB
+									</dd>
+								</dl>
+							</li>
+
+							<li>
+								<dl>
+									<dt>Blocks in Tipset</dt>
+									<dd>
+										2.1<span class="text-muted"></span>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+
+						<ul>
+							<li>
+								<dl>
+									<dt>Head Updated</dt>
+									<dd>几秒前
+								    </dd>
+								</dl>
+							</li>
+							<li>
+								<dl>
+									<dt>Pledge Collateral</dt>
+									<dd>0.93FIL</dd>
+								</dl>
+							</li>
+						</ul>
+
+						<ul>
+							<li>
+								<dl>
+									<dt>预测产量减半</dt>
+									<dd class="unconfirmed-tx">
+										<div class="unconfirmed-tx-item">
+											<span class="text-muted text-left unconfirmed-tx-item-key">时间</span>											 
+											<span>2020-05-13</span>
+										</div>
+										<div class="unconfirmed-tx-item">
+											<span class="text-muted text-left unconfirmed-tx-item-key">剩余块</span>
+											<span>19,593</span>
+										</div>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+
+						<ul data-toggle="tooltip" class="unconfirmed-txs-popover" data-original-title="" title="">
+							<li>
+								<dl>
+									<dt>
+										<a style="display: block;float: left" href="https://btc.com/stats/unconfirmed-tx">
+											未确认交易
+										</a>
+										 
+									</dt>
+									<dd class="unconfirmed-tx">
+										<div class="unconfirmed-tx-item">
+											<span class="text-muted text-left unconfirmed-tx-item-key">数量</span>
+											<span class="tx-count">1,059</span>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>
+										<a href="https://pushtx.btc.com/" target="_blank">
+											<span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+											交易加速
+										</a>
+									</dt>
+									<dd class="unconfirmed-tx">
+										<div class="unconfirmed-tx-item">
+											<span class="text-muted text-left unconfirmed-tx-item-key">体积</span>
+											<span class="text-muted tx-size">390,982</span> - <span class="tx-size-human">390.98 KB</span>
+										</div>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+						<ul>
+							<li>
+								<dl>
+									<dt>24 小时交易速率</dt>
+									<dd>3.18 交易/秒</dd>
+								</dl>
+								<dl>
+									<dt>
+										<a href="https://btc.com/stats/block-size">
+											近两周区块体积中位数
+										</a>
+									</dt>
+									<dd>1,164,189 Bytes</dd>
+								</dl>
+							</li>
+						</ul>
+
+						<ul>
+							<li>
+								<dl>
+									<dt>
+										<a href="https://btc.com/stats/unconfirmed-tx">
+											当前最佳手续费
+										</a>
+									</dt>
+									<dd>
+										<b id="fees_recommended_sb">0.00001</b>
+										<span> BTC/kVB(virtual)
+											<span class="v-help-vsize v-help" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="&lt;b&gt;交易重量&lt;/b&gt;&lt;br&gt;
+			定义如下：基础交易大小*3 + 总交易大小 （同区块重量的计算原理一样，包括基础体积到总体积）。&lt;br&gt;
+			&lt;b&gt;虚拟交易大小&lt;/b&gt;&lt;br&gt;
+			定义如下：交易重量除以4（四舍五入到整数位）。&lt;br&gt;
+			&lt;b&gt;基础交易大小&lt;/b&gt;&lt;br&gt;
+			定义如下：移除见证数据后的交易大小。&lt;br&gt;
+			&lt;b&gt;总交易大小&lt;/b&gt;&lt;br&gt;
+			定义如下：按照BIP144描述的以Bytes为单位的交易大小，包括基础数据和见证数据。" data-original-title="" title="">
+											</span>
+										</span>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
