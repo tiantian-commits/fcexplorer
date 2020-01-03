@@ -1,5 +1,6 @@
 import re
 import json
+import collections
 
 from explorer.settings import LOGGING
 import logging
@@ -10,7 +11,7 @@ logger = logging.getLogger('django.request')
 from django.shortcuts import render
 from block.models import Block, Ticket, EPostProof, BlsMessage
 
-##############################################
+############################################## demo begin ##########################################
 import math
 
 from django.template import loader
@@ -121,34 +122,75 @@ def line3d():
     )
     return line3d
 
+
+def miner_method_count_line(miner_list, methods, miner_methods):
+    line = Line()
+    line.set_global_opts(
+        tooltip_opts=opts.TooltipOpts("各Method最大值分布图"),
+        xaxis_opts=opts.AxisOpts(type_="category"),
+        yaxis_opts=opts.AxisOpts(
+            type_="value",
+            axistick_opts=opts.AxisTickOpts(is_show=True),
+            splitline_opts=opts.SplitLineOpts(is_show=True),
+        ),
+    )
+
+    line.add_xaxis(xaxis_data=miner_list)
+
+    # 每种method一条线
+    for method in methods:
+        y_data = []
+        for miner in miner_list:
+            y_data.append(miner_methods[miner][method])
+
+        line.add_yaxis(
+            series_name="Method"+str(method),
+            y_axis=y_data,
+            symbol="emptyCircle",
+            is_symbol_show=True,
+            label_opts=opts.LabelOpts(is_show=True),
+        )
+
+    return line
+
+############################################## demo end ##########################################
+
+def miner_list():
+    f = open("/home/jiawang/share/django/fcexplorer/data/miners.list", "r")
+    data = f.read()
+    miner_list = data.split('\n')
+    
+    f.close()
+    return miner_list
+
+def method_count(miners, methods):
+    miner_methods = collections.defaultdict(dict)
+    blsMessages   = BlsMessage.objects.all()
+
+    for miner in miners:
+        for method in methods:
+            miner_methods[miner][method] = len(blsMessages.filter(block__miner=miner, method=method))
+        print("miner[%s]  total:%s" %(miner, miner_methods[miner]))
+    
+    return miner_methods
+
+
 def homepage(request):
-    context = {
-        'homepage': 'index.html',
-    }
-    #return render(request, 'index.html', context)
-    return block_latest(request)
-
-def block_latest(request):
-    search = request.GET.get('search')
-
-    miner  = request.GET.get('miner')
-    height = request.GET.get('height')
-    #to     = request.GET.get('to')
-    #method = request.GET.get('method')
-
-    blocks_list = Block.objects.all().order_by('height').order_by('height')[0:10]
+    blocks_list = Block.objects.all().order_by('height')[0:10]
  
     # 需要传递给模板（templates）的对象
     #mychart = line3d()
-    #mychart = line()
-    mychart = tree()
+    methods = [2,3,4,5]
+    miners  = miner_list()[0:100]
+    miner_methods = method_count(miners, methods)
+    method_cout_chart = miner_method_count_line(miners, methods, miner_methods)
    
     context = {
         'blocks': blocks_list,
-        'myechart': mychart.render_embed()
+        'method_cout_chart': method_cout_chart.render_embed()
     }
 
-    # render函数：载入模板，并返回context对象
     return render(request, 'index.html', context)
-    #return render(request, 'block/test.html', context)
+
+
    

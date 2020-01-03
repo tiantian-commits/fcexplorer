@@ -141,7 +141,6 @@ def block_method_count(request):
 
 
 def block_list(request):
-    return block_index(request)
 
     search = request.GET.get('search')
 
