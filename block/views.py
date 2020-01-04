@@ -36,7 +36,7 @@ def block_sync(request):
     return render(request, 'block/list.html', context)
 
 def block_sync1(request):
-    for line in open("/mnt/hgfs/share/django/fcexplorer/data/blocks/26519_26619.list"):
+    for line in open("./data/blocks/26519_26619.list"):
         height     = line[0:line.find(':', 1) ]
         timestamp  = get_str_btw(line, "(", ")")
 

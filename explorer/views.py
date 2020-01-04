@@ -156,7 +156,7 @@ def miner_method_count_line(miner_list, methods, miner_methods):
 ############################################## demo end ##########################################
 
 def miner_list():
-    f = open("/home/jiawang/share/django/fcexplorer/data/miners.list", "r")
+    f = open("./data/miners.list", "r")
     data = f.read()
     miner_list = data.split('\n')
     

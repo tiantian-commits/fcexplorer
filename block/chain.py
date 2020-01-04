@@ -29,9 +29,9 @@ def write2file(miner, blockInfos, methods):
 
 class Chain:
     def getBlock(hash):
-        fname = "/mnt/hgfs/share/django/fcexplorer/data/blocks/"+hash+".block"
+        fname = "./data/blocks/"+hash+".block"
         if os.path.exists(fname):
-            f = open("/mnt/hgfs/share/django/fcexplorer/data/blocks/"+hash+".block", 'r')
+            f = open("./data/blocks/"+hash+".block", 'r')
             blockstr = f.read()
             logger.info("import %s" % fname)
             return blockstr
