@@ -133,7 +133,7 @@ html .main-body,body .main-body,html .list-body,body .list-body {
     float: left;
     height: 100%;
     color: #999;
-    margin-left: 20px
+    margin-left: 20px	
 }
 
 .sort .sort-asc {
@@ -141,7 +141,7 @@ html .main-body,body .main-body,html .list-body,body .list-body {
     float: right;
     height: 49px;
     width: 60px;
-    background: url(https://s.btc.com/explorer/assets/images/sort_88a4ce6.svg) 50% 50% no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/sort_88a4ce6.svg) 50% 50% no-repeat;
     background-size: 25px auto;
     background-color: #ccc;
     cursor: pointer
@@ -152,7 +152,7 @@ html .main-body,body .main-body,html .list-body,body .list-body {
     float: right;
     height: 49px;
     width: 60px;
-    background: url(https://s.btc.com/explorer/assets/images/sort_88a4ce6.svg) 50% 50% no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/sort_88a4ce6.svg) 50% 50% no-repeat;
     background-size: 25px auto;
     background-color: #ccc;
     transform: rotateX(180deg)
@@ -203,33 +203,6 @@ html .main-body,body .main-body,html .list-body,body .list-body {
     display: none!important
 }
 
-@font-face {
-    font-family:'Droid Sans Mono';font-style:normal;font-weight:400;src:local('Droid Sans Mono'),local('DroidSansMono'),url(https://s.btc.com/explorer/assets/fonts/Droid_Sans_Mono_400_cba8307.woff) format('woff'),url(https://s.btc.com/explorer/assets/fonts/Droid_Sans_Mono_400_fe98511.ttf) format('truetype'),url(https://s.btc.com/explorer/assets/fonts/Droid_Sans_Mono_400_f55ae41.svg#DroidSansMono) format('svg')
-}
-
-@font-face {
-    font-family:'Open Sans';font-style:normal;font-weight:300;src:local('Open Sans Light'),local('OpenSans-Light'),url(https://s.btc.com/explorer/assets/fonts/Open_Sans_300_0d0d710.woff) format('woff'),url(https://s.btc.com/explorer/assets/fonts/Open_Sans_300_a957943.ttf) format('truetype'),url(https://s.btc.com/explorer/assets/fonts/Open_Sans_300_11569a3.svg#OpenSans) format('svg')
-}
-
-@font-face {
-    font-family:'Open Sans';font-style:normal;font-weight:400;src:local('Open Sans'),local('OpenSans'),url(https://s.btc.com/explorer/assets/fonts/Open_Sans_400_ce65961.woff) format('woff'),url(https://s.btc.com/explorer/assets/fonts/Open_Sans_400_953de7b.ttf) format('truetype'),url(https://s.btc.com/explorer/assets/fonts/Open_Sans_400_7e735d7.svg#OpenSans) format('svg')
-}
-
-@font-face {
-    font-family:Roboto;font-style:normal;font-weight:300;src:local('Roboto Light'),local('Roboto-Light'),url(https://s.btc.com/explorer/assets/fonts/Roboto_300_ecce92d.woff) format('woff'),url(https://s.btc.com/explorer/assets/fonts/Roboto_300_634f53e.ttf) format('truetype'),url(https://s.btc.com/explorer/assets/fonts/Roboto_300_1edaa6e.svg#Roboto) format('svg')
-}
-
-@font-face {
-    font-family:Roboto;font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(https://s.btc.com/explorer/assets/fonts/Roboto_400_16e1d93.woff) format('woff'),url(https://s.btc.com/explorer/assets/fonts/Roboto_400_38861cb.ttf) format('truetype'),url(https://s.btc.com/explorer/assets/fonts/Roboto_400_3d3a535.svg#Roboto) format('svg')
-}
-
-@font-face {
-    font-family:'Roboto Condensed';font-style:normal;font-weight:400;src:local('Roboto Condensed'),local('RobotoCondensed-Regular'),url(https://s.btc.com/explorer/assets/fonts/Roboto_Condensed_400_9d7ee21.woff) format('woff'),url(https://s.btc.com/explorer/assets/fonts/Roboto_Condensed_400_44889ed.ttf) format('truetype'),url(https://s.btc.com/explorer/assets/fonts/Roboto_Condensed_400_87a79b4.svg#RobotoCondensed) format('svg')
-}
-
-@font-face {
-    font-family:Lato;font-style:normal;font-weight:100;src:local('Lato Hairline'),local('Lato-Hairline'),url(https://s.btc.com/explorer/assets/fonts/Lato_100_126c1aa.woff) format('woff'),url(https://s.btc.com/explorer/assets/fonts/Lato_100_4abb6ba.ttf) format('truetype'),url(https://s.btc.com/explorer/assets/fonts/Lato_100_1e9336b.svg#Lato) format('svg')
-}
 
 @font-face {
     font-family:octicons-anchor;src:url(data:font/woff;charset=utf-8;base64,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) format('woff')
@@ -3168,16 +3141,8 @@ html:not([lang=zh-cn]) .hashrate-control-container .btn {
     padding-right: 6px
 }
 
-.v-help {
-    height: 20px;
-    width: 20px;
-    background: url(https://s.btc.com/explorer/assets/images/instruction@2x_175c8d7.png) 50% 50% no-repeat;
-    background-size: 16px 16px;
-    cursor: pointer
-}
-
 .v-help:hover {
-    background: url(https://s.btc.com/explorer/assets/images/instruction_hover@2x_0571cc3.png) 50% 50% no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/instruction_hover@2x_0571cc3.png) 50% 50% no-repeat;
     background-size: 16px 16px
 }
 
@@ -3336,7 +3301,7 @@ html:not([lang=zh-cn]) .hashrate-control-container .btn {
 .loading {
     height: 250px;
     width: 540px;
-    background: url(https://s.btc.com/explorer/assets/images/loading_0c553ac.svg) 50% 50% no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/loading_0c553ac.svg) 50% 50% no-repeat;
     background-size: 40px 40px
 }
 
@@ -5391,7 +5356,7 @@ html[lang=ru] .addr-window {
 html[lang=zh-CN] .addr-icon-up {
     width: 100%;
     height: 15px;
-    background-image: url(https://s.btc.com/explorer/assets/images/popup-arrow@2x_412081c.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/popup-arrow@2x_412081c.png);
     background-repeat: no-repeat;
     background-position: right 17px bottom;
     background-size: 30px auto
@@ -5400,7 +5365,7 @@ html[lang=zh-CN] .addr-icon-up {
 html[lang=en] .addr-icon-up {
     width: 100%;
     height: 15px;
-    background-image: url(https://s.btc.com/explorer/assets/images/popup-arrow@2x_412081c.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/popup-arrow@2x_412081c.png);
     background-repeat: no-repeat;
     background-position: right 65px bottom;
     background-size: 30px auto
@@ -5409,7 +5374,7 @@ html[lang=en] .addr-icon-up {
 html[lang=ru] .addr-icon-up {
     width: 100%;
     height: 15px;
-    background-image: url(https://s.btc.com/explorer/assets/images/popup-arrow@2x_412081c.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/popup-arrow@2x_412081c.png);
     background-repeat: no-repeat;
     background-position: right 65px bottom;
     background-size: 30px auto
@@ -5533,42 +5498,42 @@ html[lang=ru] .addr-window-content {
 }
 
 .Ex_img1 {
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature1-en_d376cc7.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature1-en_d376cc7.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 256px auto
 }
 
 .Ex_img2 {
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature2-en_4262a43.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature2-en_4262a43.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 256px auto
 }
 
 .Ex_img3 {
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature3-en_7ee2358.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature3-en_7ee2358.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 256px auto
 }
 
 html[lang=zh-CN] .Ex_img1 {
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature1_bcd05ab.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature1_bcd05ab.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 256px auto
 }
 
 html[lang=zh-CN] .Ex_img2 {
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature2_bd6e492.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature2_bd6e492.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 256px auto
 }
 
 html[lang=zh-CN] .Ex_img3 {
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature3_4210862.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature3_4210862.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 256px auto
@@ -5619,7 +5584,7 @@ html[lang=zh-CN] .Ex_img3 {
     float: left;
     width: 28px;
     height: 25px;
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/icon-chrome-store_fbe421b.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/icon-chrome-store_fbe421b.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 28px auto;
@@ -5683,7 +5648,7 @@ html[lang=zh-CN] .Ex_img3 {
     margin-left: 88px;
     border: solid 0 red;
     overflow: hidden;
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/mobile_355ff30.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/mobile_355ff30.png);
     background-repeat: no-repeat;
     background-position: center top;
     background-size: 396px auto
@@ -5890,7 +5855,7 @@ html[lang=zh-CN] .Ex_img3 {
     margin-left: 88px;
     border: solid 0 red;
     overflow: hidden;
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/mobile_355ff30.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/mobile_355ff30.png);
     background-repeat: no-repeat;
     background-position: center top;
     background-size: auto 519px
@@ -5957,7 +5922,7 @@ html[lang=zh-CN] .Ex_img3 {
 }
 
 .wa_ios {
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/icon-apple_3dc51b5.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/icon-apple_3dc51b5.png);
     background-repeat: no-repeat;
     background-position: left 25px center;
     background-size: 24px auto;
@@ -5967,7 +5932,7 @@ html[lang=zh-CN] .Ex_img3 {
 }
 
 .wa_android {
-    background-image: url(https://s.btc.com/explorer/assets/images/app/pc/icon-android_4871e1c.png);
+    background-image: url(https://filecoin.com/explorer/assets/images/app/pc/icon-android_4871e1c.png);
     background-repeat: no-repeat;
     background-position: left 25px center;
     background-size: 24px auto;
@@ -5990,83 +5955,83 @@ html[lang=zh-CN] .Ex_img3 {
 
 @media only screen and (-webkit-min-device-pixel-ratio:2),only screen and (min-device-pixel-ratio:2) {
     html[lang=zh-CN] .Ex_img1 {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature1@2x_b20efc4.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature1@2x_b20efc4.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 256px auto
     }
 
     html[lang=zh-CN] .Ex_img2 {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature2@2x_7773762.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature2@2x_7773762.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 256px auto
     }
 
     html[lang=zh-CN] .Ex_img3 {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature3@2x_0797286.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature3@2x_0797286.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 256px auto
     }
 
     html[lang=en] .Ex_img1 {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature1-en@2x_54d3307.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature1-en@2x_54d3307.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 256px auto
     }
 
     html[lang=en] .Ex_img2 {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature2-en@2x_b3ab6df.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature2-en@2x_b3ab6df.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 256px auto
     }
 
     html[lang=en] .Ex_img3 {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/feature3-en@2x_908afc9.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/feature3-en@2x_908afc9.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 256px auto
     }
 
     .Ex_chrome_logo {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/icon-chrome-store@2x_becd31c.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/icon-chrome-store@2x_becd31c.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 28px auto
     }
 
     .wa_phone_body {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/mobile@2x_77caaf6.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/mobile@2x_77caaf6.png);
         background-repeat: no-repeat;
         background-position: center top;
         background-size: 396px auto
     }
 
     .wa_phone_long {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/mobile@2x_77caaf6.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/mobile@2x_77caaf6.png);
         background-size: auto 519px
     }
 
     .wa_ios {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/icon-apple@2x_7116c5e.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/icon-apple@2x_7116c5e.png);
         background-size: 24px auto
     }
 
     .wa_android {
-        background-image: url(https://s.btc.com/explorer/assets/images/app/pc/icon-android@2x_0d3c91e.png);
+        background-image: url(https://filecoin.com/explorer/assets/images/app/pc/icon-android@2x_0d3c91e.png);
         background-size: 24px auto
     }
 
     .vote-enter-pic {
         background-size: 534px auto;
-        background-image: url(https://s.btc.com/explorer/assets/images/vote/enter_picture_en@2x_e638c8a.png)
+        background-image: url(https://filecoin.com/explorer/assets/images/vote/enter_picture_en@2x_e638c8a.png)
     }
 
     html[lang=zh-CN] .vote-enter-pic {
-        background-image: url(https://s.btc.com/explorer/assets/images/vote/enter_picture_cn@2x_c7fd18b.png)
+        background-image: url(https://filecoin.com/explorer/assets/images/vote/enter_picture_cn@2x_c7fd18b.png)
     }
 }
 
@@ -6481,31 +6446,31 @@ h3 {
 
 #copay-wallet-cn {
     display: inline-block;
-    background: url(https://s.btc.com/explorer/assets/images/replay_copay_cn@2x_4566799.png) 0 0 no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/replay_copay_cn@2x_4566799.png) 0 0 no-repeat;
     background-size: contain
 }
 
 #copay-wallet-en {
     display: inline-block;
-    background: url(https://s.btc.com/explorer/assets/images/replay_copay_en@2x_edaa27c.png) 0 0 no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/replay_copay_en@2x_edaa27c.png) 0 0 no-repeat;
     background-size: contain
 }
 
 #jaxx-wallet {
     display: inline-block;
-    background: url(https://s.btc.com/explorer/assets/images/replay_jaxx_en@2x_6dccb1e.png) 0 0 no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/replay_jaxx_en@2x_6dccb1e.png) 0 0 no-repeat;
     background-size: contain
 }
 
 #electrum-wallet {
     display: inline-block;
-    background: url(https://s.btc.com/explorer/assets/images/replay_electrum_en@2x_b5aa19b.png) 0 0 no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/replay_electrum_en@2x_b5aa19b.png) 0 0 no-repeat;
     background-size: contain
 }
 
 #greenaddress-wallet {
     display: inline-block;
-    background: url(https://s.btc.com/explorer/assets/images/replay_greenaddress_en@2x_59856b5.png) 0 0 no-repeat;
+    background: url(https://filecoin.com/explorer/assets/images/replay_greenaddress_en@2x_59856b5.png) 0 0 no-repeat;
     background-size: contain
 }
 
