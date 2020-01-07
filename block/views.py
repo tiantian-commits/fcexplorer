@@ -124,7 +124,7 @@ def block_detail(request):
     }
     return render(request, 'block/detail.html', context)
 
-def block_method_count(request):
+def block_count(request):
     to     = request.GET.get('to')
     method = request.GET.get('method')
     logger.info("to: %s, method：%s" %(to, method))
@@ -138,7 +138,7 @@ def block_method_count(request):
         'blsmessages': blsmessages
     }
 
-    return render(request, 'block/count.html', context)
+    return render(request, 'block/block_count.html', context)
 
 def block_search(request):
     search = request.GET.get('search')
@@ -160,7 +160,7 @@ def block_search(request):
         'blocks': blocks_list,
         'search': search,
     }
-    print("startTimestamp:%d endTimestamp:%d currentTimestamp:%d" %(int(startTimestamp), int(endTimestamp), int(time.time())))
+
     return render(request, 'block/block_search.html', context)
 
 # get blocklist with date

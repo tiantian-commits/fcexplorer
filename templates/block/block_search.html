@@ -31,7 +31,7 @@
     <!-- 搜索栏 -->
     <div class="row">
         <div class="col-auto mr-auto">
-            <form class="form-inline" action="{% url 'block:block_method_count' %}" method="GET" onsubmit="this.to.value = this.to.value.trim(),this.method.value=this.method.value.trim()" >
+            <form class="form-inline" action="{% url 'block:block_count' %}" method="GET" onsubmit="this.to.value = this.to.value.trim(),this.method.value=this.method.value.trim()" >
 				<input type="text" class="form-control mb-2 mr-sm-2" name="to" placeholder="To" >
 				<input type="text" class="form-control mb-2 mr-sm-2" name="method" placeholder="Method" >
                 <input type="submit" class="form-control mb-2 mr-sm-2" value="查询">
