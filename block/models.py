@@ -6,7 +6,7 @@ class Block(models.Model):
     height      = models.IntegerField(default=-1)
     hash        = models.CharField(max_length=100)
     miner       = models.CharField(max_length=100)
-    timestamp   = models.DateTimeField(default=timezone.now)
+    timestamp   = models.IntegerField(verbose_name="更新时间戳", default=timezone.now)
 
 class Ticket(models.Model):
     block  = models.ForeignKey(Block, on_delete=models.CASCADE)

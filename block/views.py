@@ -1,7 +1,8 @@
 import re
 import json
-
+import datetime
 import math
+import time
 
 from explorer.views import homepage
 from explorer.settings import LOGGING
@@ -27,7 +28,7 @@ def get_str_btw(s, f, b):
     par = s.partition(f)
     return (par[2].partition(b))[0][:]
 
-def block_sync(request):
+def block_sync1(request):
     blocks_list = Block.objects.all()
     context = {
         'blocks': blocks_list,
@@ -35,13 +36,12 @@ def block_sync(request):
     context = { 'blocks': blocks_list }
     return render(request, 'block/list.html', context)
 
-def block_sync1(request):
+def block_sync(request):
     for line in open("./data/blocks/26519_26619.list"):
         height     = line[0:line.find(':', 1) ]
-        timestamp  = get_str_btw(line, "(", ")")
-
         hash_miner_list = get_str_btw(line, "[", "]")
         block_list_str  = re.split(',', hash_miner_list)
+
         for block_str in  block_list_str:
             if(len(block_str.strip())) > 0:
                 hash  = block_str[0:block_str.find(':', 1) ].strip()
@@ -51,14 +51,15 @@ def block_sync1(request):
                 if ( blockstr.strip() == ''):
                     continue
 
-                blockobj = Block.objects.create(height=height, hash=hash, miner=miner)
                 logger.info("add block [%s, %s, %s]" %(height, hash, miner))
                 block = json.loads(blockstr)
                 logger.info("{")
 
                 logger.info("  Miner:%s" %(miner))
                 logger.info("  height:%s" %(height))
-                logger.info("  Timestamp:%s" %(timestamp))
+                logger.info("  Timestamp:%s" %(block["Timestamp"]))
+                blockobj = Block.objects.create(height=height, hash=hash, miner=miner, timestamp=block["Timestamp"])
+
                 #Ticket
                 ticket = block['Ticket']
                 logger.info("  Ticket:{")
@@ -139,14 +140,8 @@ def block_method_count(request):
 
     return render(request, 'block/count.html', context)
 
-
-def block_list(request):
-
+def block_search(request):
     search = request.GET.get('search')
-
-    miner  = request.GET.get('miner')
-    height = request.GET.get('height')
-
     blocks_list = Block.objects.all()
     # 搜索查询集
     logger.info("search: %s" %(search))
@@ -159,13 +154,42 @@ def block_list(request):
     else:
         # 将 search 参数重置为空
         search = ''
- 
+
     blocks_list.order_by('height')
-    # 需要传递给模板（templates）的对象
     context = {
         'blocks': blocks_list,
         'search': search,
     }
-    context = { 'blocks': blocks_list }
+    print("startTimestamp:%d endTimestamp:%d currentTimestamp:%d" %(int(startTimestamp), int(endTimestamp), int(time.time())))
+    return render(request, 'block/block_search.html', context)
+
+# get blocklist with date
+def block_list(request):  
+    date = request.GET.get('date')
+    if (None == date):
+        date = datetime.date.today()
+    print ("date:%s" % (date))
+
+    startTimestr = ("%s %s" %(date, " 00:00:00"))
+    startTimestamp = time.mktime(time.strptime(startTimestr, "%Y-%m-%d %H:%M:%S"))
+    print (startTimestamp)
+
+    endTimeStr = ("%s %s" %(date, " 23:59:59"))
+    endTimestamp = time.mktime(time.strptime(endTimeStr, "%Y-%m-%d %H:%M:%S"))
+    print (endTimestamp)
+
+    blocks_list = Block.objects.all().filter(timestamp__gte=startTimestamp, timestamp__lte=endTimestamp)
+    blocks_list.order_by('height')
+
+    # 需要传递给模板（templates）的对象
+    context = {
+        'blocks': blocks_list,
+        'date': date,
+        'startTimestamp' : startTimestamp,
+        'endTimestamp' : endTimestamp,
+        'currentTimestamp' : startTimestamp,
+    }
+    print("startTimestamp:%d endTimestamp:%d currentTimestamp:%d" %(int(startTimestamp), int(endTimestamp), int(time.time())))
     # render函数：载入模板，并返回context对象
-    return render(request, 'block/list.html', context)
+    return render(request, 'block/block_list.html', context)
+    

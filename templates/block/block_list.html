@@ -1,0 +1,204 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    首页
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<!-- 定义放置文章标题的div容器 -->
+<div class="container">
+<script src="../../static/vendor_26a2fcf.js"></script>
+<script>
+    var currentTimestamp = {{ startTimestamp|safe }};
+</script>
+<script>
+	var globals = {
+		"endTimestamp": 1578230333,
+		"startTimestamp": 1231006505,
+		"currentTimestamp": "{{ startTimestamp }}",
+		"trans": {
+			"title": "\u533a\u5757\u5217\u8868",
+			"Blocks": "\u533a\u5757",
+			"Block": "\u5757",
+			"summary": "\u6458\u8981",
+			"Prev-day": "\u524d\u4e00\u5929",
+			"Next-day": "\u540e\u4e00\u5929",
+			"Prev-block": "\u524d\u4e00\u4e2a\u5757",
+			"Next-block": "\u540e\u4e00\u4e2a\u5757",
+			"Markele-root": "Merkle Root",
+			"Unconfirmed": "\u672a\u786e\u8ba4",
+			"confirmations": "\u786e\u8ba4",
+			"Transaction": "\u4ea4\u6613",
+			"year": "\u5e74",
+			"month": "\u6708",
+			"day": "\u65e5"
+		},
+		"lang": "zh-cn"
+	};
+
+	console.log("globals.currentTimestamp:" + globals.currentTimestamp)
+	console.log("globals.currentTimestamp:" + globals.startTimestamp)
+</script>
+
+	<div class="main-body">
+		<div class="container">
+			<div class="row">
+				<ol class="breadcrumb bm">
+					<li>
+						<a href="{% url 'homepage' %}">首页</a>
+				    </li>
+					<li>
+						<a href="{% url 'block:block_sync' %}">同步</a>
+				    </li>
+					<li>{{ date|safe }}</li>
+				</ol>
+			</div>
+			<div class="row blockList">
+				<div class="blockList-inner">
+					<div class="blockList-cal">
+					</div>
+					<div class="blockList-list">
+						<table class="table">
+							<tbody
+								<tr id="append">
+									<th class="text-right">高度</th>
+									<th class="text-center">矿工</th>
+									<th class="text-center">块收益</th>
+									<th class="text-right">时间</th>
+									<th class="text-center">块哈希</th>
+								</tr>
+
+								{% for block in blocks %}
+								<tr data-id="610,407">
+									<td class="text-right"><a href="{% url 'block:block_detail' %}?hash={{ block.hash }}" ga-type="block" ga-target="from height">{{ block.height }}</a></td>
+									<td class="text-left">
+										<i class="icon-pool icon-pool-f2pool"></i><div class="cell-poolname">
+											<a href="{% url 'block:block_detail' %}?hash={{ block.hash }}">{{ block.miner }}</a>
+										</div>
+									</td>
+									<td class="text-center indexBlockList-blockAward"><span class="text-muted">0.1 FIL</span></td>
+									<td class="text-right indexBlockList-blockTimestamp" data-timestamp="1577681055">{{ block.timestamp }}</td>
+									<td class="text-center indexBlockList-blockhash"><a href="{% url 'block:block_detail' %}" ga-type="block" ga-target="from blockhash">{{ block.hash }}</a></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					<div class="page-nav">
+						<a href="{% url 'block:block_list' %}?date=2020-01-01" class="page-navPrev text-hide">前一天</a>
+						<a href="{% url 'block:block_list' %}?date=2020-01-03" class="page-navNext text-hide">后一天</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<script type="text/template" id="block-list-cal-year">
+    <li class="blockList-cal-row blockList-cal-row-year">
+        <span class="blockList-cal-unit"><%= globals.trans.year %></span>
+        <% for (var i = startYear; i <= endYear; i++) { %>
+        <a href="javascript:" class="blockList-cal-num<%= i == currentYear ? ' active' : '' %>" data-type="year"><%= i %></a>
+        <% } %>
+    </li>
+</script>
+
+<script type="text/template" id="block-list-cal-month">
+    <li class="blockList-cal-row blockList-cal-row-month">
+        <span class="blockList-cal-unit"><%= globals.trans.month %></span>
+        <% for (var i = startMonth; i < endMonth; i++) { %>
+        <a href="javascript:" class="blockList-cal-num<%= i == currentMonth ? ' active' : '' %>" data-type="month"><%= i + 1 %></a>
+        <% } %>
+    </li>
+</script>
+
+<script type="text/template" id="block-list-cal-day">
+    <li class="blockList-cal-row blockList-cal-row-date">
+        <span class="blockList-cal-unit"><%= globals.trans.day %></span>
+        <% for (var i = startDay; i <= endDay; i++) { %>
+        <a href="?date=<%= cur.format('YYYY-MM-' + (i < 10 ? '0' + i : i)) %>" class="blockList-cal-num<%= i == currentDate ? ' active' : '' %>" data-type="date"><%= i %></a>
+        <% } %>
+    </li>
+</script>
+
+<script type="text/template" id="block-list-cal">
+    <ul><%=raw year %>
+        <%=raw month %>
+        <%=raw date %>
+    </ul>
+</script>
+
+<!-- 时间本地化 -->
+<script>
+	!function() {
+		function t(t) {
+			return template("block-list-cal-year", {
+				startYear: l.year(),
+				endYear: s.year(),
+				currentYear: t
+			})
+		}
+		function e(t) {
+			return template("block-list-cal-month", {
+				startMonth: o == l.year() ? l.month() : 0,
+				endMonth: o == s.year() ? s.month() + 1 : 12,
+				currentMonth: t
+			})
+		}
+
+		function a(t) {
+			return template("block-list-cal-day", {
+				startDay: o == l.year() && r == l.month() ? l.date() : 1,
+				endDay: o == s.year() && r == s.month() ? s.date() : moment([o, r]).endOf("month").date(),
+				currentDate: t,
+				cur: i
+			})
+		}
+		var n = $(".blockList-cal"),
+		l = moment.unix(globals.startTimestamp).utcOffset(0),
+		s = moment.unix(globals.endTimestamp).utcOffset(0),
+		i = moment.unix(Math.min(globals.endTimestamp, globals.currentTimestamp)).utcOffset(0),
+		o = i.year(),
+		r = i.month(),
+		c = i.date(),
+		d = $(template("block-list-cal", {
+			year: t(i.year()),
+			month: e(i.month()),
+			date: a(i.date())
+		}));
+		d.on("click", "a",
+		function() {
+			var t = $(this),
+			n = t.data("type");
+			switch (n) {
+			case "year":
+				i.year(o = t.text()),
+				t.siblings().removeClass("active").end().addClass("active"),
+				d.find(".blockList-cal-row-month").slideUp(200,
+				function() {
+					$(e( - 1)).hide().replaceAll($(this)).slideDown(200)
+				}),
+				d.find(".blockList-cal-row-date").slideUp(200);
+				break;
+			case "month":
+				i.month(r = t.text() - 1),
+				t.siblings().removeClass("active").end().addClass("active"),
+				d.find(".blockList-cal-row-date").slideUp(200,
+				function() {
+					$(a( - 1)).hide().replaceAll($(this)).slideDown(200)
+				});
+				break;
+			case "date":
+				i.date(c = t.text()),
+				t.siblings().removeClass("active").end().addClass("active")
+			}
+		}),
+		n.html(d)
+	} ();
+</script>
+
+{% endblock content %}
