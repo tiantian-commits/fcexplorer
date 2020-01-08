@@ -1,26 +1,32 @@
 import re
 import json
-import datetime
 import math
 import time
+import datetime
 
 from explorer.views import homepage
 from explorer.settings import LOGGING
 import logging
 
+from django.db.models import Max 
+from concurrent.futures import ThreadPoolExecutor, wait, ALL_COMPLETED, FIRST_COMPLETED
+
 logging.config.dictConfig(LOGGING)
+
 logger = logging.getLogger('django.request')
 
 from django.shortcuts import render
 from django.db.models import Q
 from django.http import HttpResponse
-from .models import Block, Ticket, EPostProof, BlsMessage
+from .models import *
 from .chain import Chain
+
+from apscheduler.schedulers.blocking import BlockingScheduler
+
 
 ##############################################
 from django.template import loader
 from pyecharts.charts  import Line3D
-#from pyecharts.constants import DEFAULT_HOST
 import pyecharts.options as opts
 
 
@@ -28,88 +34,178 @@ def get_str_btw(s, f, b):
     par = s.partition(f)
     return (par[2].partition(b))[0][:]
 
-def block_sync1(request):
+def block_sync_finished(request):
     blocks_list = Block.objects.all()
     context = {
         'blocks': blocks_list,
     }
     context = { 'blocks': blocks_list }
-    return render(request, 'block/list.html', context)
+    return render(request, 'block/block_list.html', context)
 
+
+#def block_sync(request):    
+#    scheduler = BlockingScheduler()
+#    scheduler.add_job(block_sync_main, "interval", seconds=10, args=[123])
+#    scheduler.start()
+
+#    return block_sync_finished(request)
+
+#首先获取已同步的区块高度，然后获取最新高度，再将已同步的和最新区块高度分解成多个任务同步到数据库
 def block_sync(request):
-    for line in open("./data/blocks/26519_26619.list"):
-        height     = line[0:line.find(':', 1) ]
-        hash_miner_list = get_str_btw(line, "[", "]")
-        block_list_str  = re.split(',', hash_miner_list)
+    executor = ThreadPoolExecutor(max_workers=10)
 
-        for block_str in  block_list_str:
-            if(len(block_str.strip())) > 0:
-                hash  = block_str[0:block_str.find(':', 1) ].strip()
-                miner = block_str[block_str.find(':', 1): ][1:].strip()
+    chain_height = Chain.getChainHeight()
+    sync_height  = Block.objects.all().aggregate(Max('height'))["height__max"]
+    if(None ==  sync_height):
+        logger.info("No data has been synced, there are %d data to be synchronized" %(chain_height))
+        sync_height = 0
 
-                blockstr = Chain.getBlock(hash)
-                if ( blockstr.strip() == ''):
-                    continue
+    if (chain_height == sync_height):
+        logger.info("data is up to date. %d" %(sync_height))
+        return
 
-                logger.info("add block [%s, %s, %s]" %(height, hash, miner))
-                block = json.loads(blockstr)
-                logger.info("{")
+    chain_list = Chain.getChainList(chain_height, chain_height - sync_height)
 
-                logger.info("  Miner:%s" %(miner))
-                logger.info("  height:%s" %(height))
-                logger.info("  Timestamp:%s" %(block["Timestamp"]))
-                blockobj = Block.objects.create(height=height, hash=hash, miner=miner, timestamp=block["Timestamp"])
+    #all_task = [executor.submit(block_sync_thread, (block)) for block in chain_list]
+    #wait(all_task, return_when=ALL_COMPLETED)
 
-                #Ticket
-                ticket = block['Ticket']
-                logger.info("  Ticket:{")
-                logger.info("    VRFProof:%s" %(ticket['VRFProof']))
-                logger.info("  },")
-                epostproofobj = Ticket.objects.create(block=blockobj, vrf_proof=ticket['VRFProof'])
+    for block_summary in chain_list:
+        block_sync_thread(block_summary)
 
-                # EPostProof
-                ePostProof = block['EPostProof']
-                logger.info("  EPostProof:{")
-                logger.info("    Proof:%s" %(ePostProof['Proof']))
-                logger.info("    PostRand:%s" %(ePostProof['PostRand']))
-                logger.info("    Proof:%s" %(ePostProof['Proof']))
-                logger.info("  },")
-                epostproofobj = EPostProof.objects.create(block=blockobj, proof=ePostProof['Proof'], postrand=ePostProof['PostRand'])
+    return block_sync_finished(request)
 
-                #BlsMessages
-                logger.info("  BlsMessages: [")              
-                for blsmessage in block['BlsMessages']:
-                    to     = blsmessage['To']
-                    method = int(blsmessage['Method'])
-                    nonce  = blsmessage['Nonce']
-                    logger.info("    {")                      
-                    logger.info("      To:%s" %(blsmessage['To']))
-                    logger.info("      From:%s" %(blsmessage['From']))
-                    logger.info("      Nonce:%s" %(blsmessage['Nonce']))
-                    logger.info("      Value:%s" %(blsmessage['Value']))
-                    logger.info("      GasPrice:%s" %(blsmessage['GasPrice']))
-                    logger.info("      GasLimit:%s" %(blsmessage['GasLimit']))
-                    logger.info("      Method:%s" %(blsmessage['Method']))
-                    logger.info("    },")
-                    blsMessageobj = BlsMessage.objects.create(block=blockobj, to=blsmessage['To'], _from=blsmessage['From'], nonce=blsmessage['Nonce'], value=blsmessage['Value'], gas_price=blsmessage['GasPrice'], gas_limit=blsmessage['GasLimit'], method=blsmessage['Method'])
-                logger.info("  ],")
+def block_sync_thread(block_summary):
+    height          = block_summary[0:block_summary.find(':', 1) ]
+    hash_miner_list = get_str_btw(block_summary, "[", "]")
+    block_list_str  = re.split(',', hash_miner_list)
 
-                logger.info("  ParentMessages: [")              
-                for parentmessage in block['ParentMessages']:
-                    logger.info("    {")                      
-                    logger.info("      /:%s" %(parentmessage['/']))
-                    logger.info("    },")
+    for block_str in  block_list_str:
+        if(len(block_str.strip())) > 0:
+            hash  = block_str[0:block_str.find(':', 1) ].strip()
+            miner = block_str[block_str.find(':', 1): ][1:].strip()
 
-                logger.info("  ]")
+            block_detail_str = Chain.getBlock(hash)
+            if ( block_detail_str.strip() == ''):
+                continue
 
-                logger.info("}") #end block
+            logger.info("add block [%s, %s, %s]" %(height, hash, miner))
+            block = json.loads(block_detail_str)
+            logger.info("{")
 
-    blocks_list = Block.objects.all()
-    context = {
-        'blocks': blocks_list,
-    }
-    context = { 'blocks': blocks_list }
-    return render(request, 'block/list.html', context)
+            logger.info("  \"Miner\":%s" %(miner))
+            block_obj, created = Block.objects.update_or_create(hash=hash,
+                                           defaults = {
+                                                     "height": height,
+                                                     "miner": miner,
+                                                     "timestamp": block["Timestamp"],
+                                                     "parent_weight": block["ParentWeight"]
+                                                    }
+                                           )
+            logger.info("  update_or_create %d: %s" %(created, hash)  )
+
+            #Ticket
+            logger.info("  \"Ticket\": {")
+            logger.info("    \"VRFProof\": %s" %(block['Ticket']['VRFProof']))
+            logger.info("  },")
+            Ticket.objects.create(block=block_obj, vrf_proof=block['Ticket']['VRFProof'])
+
+            # EPostProof
+            epost_proof_obj = EPostProof.objects.create(block=block_obj, proof=block['EPostProof']['Proof'], postrand=block['EPostProof']['PostRand'])
+            logger.info("  \"EPostProof\": {")
+            logger.info("    \"Proof\": %s" %(block['EPostProof']['Proof']))
+            logger.info("    \"PostRand\": %s" %(block['EPostProof']['PostRand']))
+            ## Candidates
+            logger.info("    \"Candidates\": [")
+            for candidate in block['EPostProof']["Candidates"]:
+                logger.info("        {")
+                logger.info("            Partial:%s" %(candidate["Partial"]))
+                logger.info("            SectorID:%s" %(candidate["SectorID"]))
+                logger.info("            ChallengeIndex:%s" %(candidate["ChallengeIndex"]))
+                logger.info("        },")
+                Candidate.objects.create(epost_proof=epost_proof_obj, partial=candidate["Partial"], sector_id=candidate["SectorID"], challenge_index=candidate["ChallengeIndex"])
+            logger.info("      ],") #end of Candidates
+
+            logger.info("  },") #end of EPostProof
+
+            #Parents
+            logger.info("  Parents: [")
+            for parent in block['Parents']:
+                logger.info("    {")
+                logger.info("        \"/\": %s" %(parent['/']))
+                logger.info("    },")
+                Parent.objects.create(block=block_obj, slash=parent['/'])
+            logger.info("  ],")
+
+            #ParentWeight
+            logger.info("  \"ParentWeight\": %s" %(block["ParentWeight"]))
+            #Height
+            logger.info("  \"Height\": %s" %(height))
+
+            #ParentStateRoot
+            logger.info("  \"ParentStateRoot\": {")
+            logger.info("    \"/\": %s" %(block['ParentStateRoot']['/']))
+            logger.info("  },")
+            ParentStateRoot.objects.create(block=block_obj, slash=block['ParentStateRoot']['/'])
+
+            #ParentMessageReceipts
+            logger.info("  \"ParentMessageReceipts\": {")
+            logger.info("    \"/\": %s" %(block['ParentMessageReceipts']['/']))
+            logger.info("  },")
+            ParentMessageReceipt.objects.create(block=block_obj, slash=block['ParentMessageReceipts']['/'])
+
+            #Messages
+            logger.info("  \"Messages\": [")
+            logger.info("    {")
+            logger.info("        \"/\": %s" %(block['Messages']["/"]))
+            logger.info("    },")
+            Message.objects.create(block=block_obj, slash=block['Messages']['/'])
+            logger.info("  ],")
+
+            #BLSAggregate
+            logger.info("  \"BLSAggregate\": {")
+            logger.info("    \"Type\": %s" %(block['BLSAggregate']['Type']))
+            logger.info("    \"Data\": %s" %(block['BLSAggregate']['Data']))
+            logger.info("  },")
+            BLSAggregate.objects.create(block=block_obj, type=block['BLSAggregate']['Type'], data=block['BLSAggregate']['Data'])
+
+            #Timestamp
+            logger.info("  Timestamp:%s" %(block["Timestamp"]))
+
+            #BlockSig
+            logger.info("  \"BlockSig\": {")
+            logger.info("    \"Type\": %s" %(block['BlockSig']['Type']))
+            logger.info("    \"Data\": %s" %(block['BlockSig']['Data']))
+            logger.info("  },")
+            BlockSig.objects.create(block=block_obj, type=block['BlockSig']['Type'], data=block['BlockSig']['Data'])
+
+            #BlsMessages
+            logger.info("  BlsMessages: [")              
+            for blsmessage in block['BlsMessages']:
+                to     = blsmessage['To']
+                method = int(blsmessage['Method'])
+                nonce  = blsmessage['Nonce']
+                logger.info("    {")                    
+                logger.info("      To:%s" %(blsmessage['To']))
+                logger.info("      From:%s" %(blsmessage['From']))
+                logger.info("      Nonce:%s" %(blsmessage['Nonce']))
+                logger.info("      Value:%s" %(blsmessage['Value']))
+                logger.info("      GasPrice:%s" %(blsmessage['GasPrice']))
+                logger.info("      GasLimit:%s" %(blsmessage['GasLimit']))
+                logger.info("      Method:%s" %(blsmessage['Method']))
+                logger.info("    },")
+                BlsMessage.objects.create(block=block_obj, to=blsmessage['To'], _from=blsmessage['From'], nonce=blsmessage['Nonce'], value=blsmessage['Value'], gas_price=blsmessage['GasPrice'], gas_limit=blsmessage['GasLimit'], method=blsmessage['Method'])
+            logger.info("  ],")
+
+            logger.info("  ParentMessages: [")              
+            for parentmessage in block['ParentMessages']:
+                logger.info("    {")                      
+                logger.info("      /:%s" %(parentmessage['/']))
+                logger.info("    },")
+
+            logger.info("  ]")
+
+            logger.info("}") #end block
+
 
 def block_detail(request):
     hash  = request.GET.get('hash')
@@ -168,15 +264,12 @@ def block_list(request):
     date = request.GET.get('date')
     if (None == date):
         date = datetime.date.today()
-    print ("date:%s" % (date))
 
     startTimestr = ("%s %s" %(date, " 00:00:00"))
     startTimestamp = time.mktime(time.strptime(startTimestr, "%Y-%m-%d %H:%M:%S"))
-    print (startTimestamp)
 
     endTimeStr = ("%s %s" %(date, " 23:59:59"))
     endTimestamp = time.mktime(time.strptime(endTimeStr, "%Y-%m-%d %H:%M:%S"))
-    print (endTimestamp)
 
     blocks_list = Block.objects.all().filter(timestamp__gte=startTimestamp, timestamp__lte=endTimestamp)
     blocks_list.order_by('height')
@@ -189,7 +282,7 @@ def block_list(request):
         'endTimestamp' : endTimestamp,
         'currentTimestamp' : startTimestamp,
     }
-    print("startTimestamp:%d endTimestamp:%d currentTimestamp:%d" %(int(startTimestamp), int(endTimestamp), int(time.time())))
+
     # render函数：载入模板，并返回context对象
     return render(request, 'block/block_list.html', context)
     

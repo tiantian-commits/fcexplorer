@@ -120,7 +120,7 @@
     <li class="blockList-cal-row blockList-cal-row-date">
         <span class="blockList-cal-unit"><%= globals.trans.day %></span>
         <% for (var i = startDay; i <= endDay; i++) { %>
-        <a href="?date=<%= cur.format('YYYY-MM-' + (i < 10 ? '0' + i : i)) %>" class="blockList-cal-num<%= i == currentDate ? ' active' : '' %>" data-type="date"><%= i %></a>
+        <a href="{% url 'block:block_list' %}?date=<%= cur.format('YYYY-MM-' + (i < 10 ? '0' + i : i)) %>" class="blockList-cal-num<%= i == currentDate ? ' active' : '' %>" data-type="date"><%= i %></a>
         <% } %>
     </li>
 </script>

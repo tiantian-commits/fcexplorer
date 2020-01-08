@@ -12,12 +12,6 @@ logger = logging.getLogger('django.request')
 def execshell(cmd):
     return os.popen(cmd).read().strip()
 
-def getChainHeight():
-    heightblock = execshell('lotus chain list --count 1')
-    attrs = re.split(' ', heightblock)
-    
-    return int(attrs[0][:-1])
-
 def write2file(miner, blockInfos, methods):
     f = open(miner+'.txt','a')
     for blockInfo in blockInfos:
@@ -28,17 +22,53 @@ def write2file(miner, blockInfos, methods):
     f.close()
 
 class Chain:
-    def getBlock(hash):
-        fname = "./data/blocks/"+hash+".block"
-        if os.path.exists(fname):
-            f = open("./data/blocks/"+hash+".block", 'r')
-            blockstr = f.read()
-            logger.info("import %s" % fname)
-            return blockstr
+    def miner_list():
+        f = os.popen("lotus state list-miners")
+        result = f.read().strip()
+        if len(result) == 0:
+            f = open("./data/miners.list", "r")
+            result = f.read().strip()
+            f.close()
+
+        return result.split('\n')
+
+    def getChainHeight():
+        f = os.popen("lotus chain list --count 1")
+        result = f.read().strip()
+
+        height  = re.split(' ', result)[0][:-1]
+        if (height.isdigit()):
+            return int(attrs[0][:-1])
         else:
-            logger.info("import %s failed!" % fname)
-            return ""
-    
+            return 25538
+
+    def getChainList(height, count):
+        cmd = "lotus chain list --height %s --count %s" %(height, count)
+        f = os.popen(cmd)
+        result = f.read().strip()
+        if len(result) == 0:
+            f = open("./data/blocks/26519_26619.list", "r")
+            result = f.read().strip()
+            f.close()
+
+        chanin_list = result.split('\n')
+
+        return chanin_list
+
+    def getBlock(hash):
+        cmd = "lotus chain getblock %s" %(hash)
+        f = os.popen(cmd)
+        result = f.read().strip()
+        if len(result) == 0:
+            fname = "./data/blocks/"+hash+".block"
+            if os.path.exists(fname):
+                f = open(fname, "r")
+                result = f.read().strip()
+                f.close()
+
+        return result
+
+
     def getMinerBlocks(miner, methods):
         blockInfos = []
         count = 100

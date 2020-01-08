@@ -10,6 +10,7 @@ logger = logging.getLogger('django.request')
 
 from django.shortcuts import render
 from block.models import Block, Ticket, EPostProof, BlsMessage
+from block.chain import Chain
 
 ############################################## demo begin ##########################################
 import math
@@ -154,15 +155,6 @@ def miner_method_count_line(miner_list, methods, miner_methods):
     return line
 
 ############################################## demo end ##########################################
-
-def miner_list():
-    f = open("./data/miners.list", "r")
-    data = f.read()
-    miner_list = data.split('\n')
-    
-    f.close()
-    return miner_list
-
 def method_count(miners, methods):
     miner_methods = collections.defaultdict(dict)
     blsMessages   = BlsMessage.objects.all()
@@ -170,7 +162,7 @@ def method_count(miners, methods):
     for miner in miners:
         for method in methods:
             miner_methods[miner][method] = len(blsMessages.filter(block__miner=miner, method=method))
-        print("miner[%s]  total:%s" %(miner, miner_methods[miner]))
+        #print("miner[%s]  total:%s" %(miner, miner_methods[miner]))
     
     return miner_methods
 
@@ -181,7 +173,7 @@ def homepage(request):
     # 需要传递给模板（templates）的对象
     #mychart = line3d()
     methods = [2,3,4,5]
-    miners  = miner_list()[0:100]
+    miners  = Chain.miner_list()[0:100]
     miner_methods = method_count(miners, methods)
     method_cout_chart = miner_method_count_line(miners, methods, miner_methods)
    
