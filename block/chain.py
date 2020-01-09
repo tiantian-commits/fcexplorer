@@ -38,7 +38,7 @@ class Chain:
 
         height  = re.split(' ', result)[0][:-1]
         if (height.isdigit()):
-            return int(attrs[0][:-1])
+            return int(height)
         else:
             return 25538
 
