@@ -130,12 +130,13 @@ def block_sync_thread(block_summary):
             logger.info("  },") #end of EPostProof
 
             #Parents
-            logger.info("  Parents: [")
-            for parent in block['Parents']:
-                logger.info("    {")
-                logger.info("        \"/\": %s" %(parent['/']))
-                logger.info("    },")
-                Parent.objects.create(block=block_obj, slash=parent['/'])
+            if None != block['Parents']:
+                logger.info("  Parents: [")
+                for parent in block['Parents']:
+                    logger.info("    {")
+                    logger.info("        \"/\": %s" %(parent['/']))
+                    logger.info("    },")
+                    Parent.objects.create(block=block_obj, slash=parent['/'])
             logger.info("  ],")
 
             #ParentWeight
@@ -198,11 +199,13 @@ def block_sync_thread(block_summary):
                 BlsMessage.objects.create(block=block_obj, to=blsmessage['To'], _from=blsmessage['From'], nonce=blsmessage['Nonce'], value=blsmessage['Value'], gas_price=blsmessage['GasPrice'], gas_limit=blsmessage['GasLimit'], method=blsmessage['Method'])
             logger.info("  ],")
 
-            logger.info("  ParentMessages: [")              
-            for parentmessage in block['ParentMessages']:
-                logger.info("    {")                      
-                logger.info("      /:%s" %(parentmessage['/']))
-                logger.info("    },")
+            #ParentMessages
+            if None != block['ParentMessages']:
+                logger.info("  ParentMessages: [")            
+                for parentmessage in block['ParentMessages']:
+                    logger.info("    {")                      
+                    logger.info("      /:%s" %(parentmessage['/']))
+                    logger.info("    },")
 
             logger.info("  ]")
 
