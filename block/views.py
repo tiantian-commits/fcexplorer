@@ -116,15 +116,16 @@ def block_sync_thread(block_summary):
             logger.info("    \"Proof\": %s" %(block['EPostProof']['Proof']))
             logger.info("    \"PostRand\": %s" %(block['EPostProof']['PostRand']))
             ## Candidates
-            logger.info("    \"Candidates\": [")
-            for candidate in block['EPostProof']["Candidates"]:
-                logger.info("        {")
-                logger.info("            Partial:%s" %(candidate["Partial"]))
-                logger.info("            SectorID:%s" %(candidate["SectorID"]))
-                logger.info("            ChallengeIndex:%s" %(candidate["ChallengeIndex"]))
-                logger.info("        },")
-                Candidate.objects.create(epost_proof=epost_proof_obj, partial=candidate["Partial"], sector_id=candidate["SectorID"], challenge_index=candidate["ChallengeIndex"])
-            logger.info("      ],") #end of Candidates
+            if None != block['EPostProof']["Candidates"]:
+                logger.info("    \"Candidates\": [")
+                for candidate in block['EPostProof']["Candidates"]:
+                    logger.info("        {")
+                    logger.info("            Partial:%s" %(candidate["Partial"]))
+                    logger.info("            SectorID:%s" %(candidate["SectorID"]))
+                    logger.info("            ChallengeIndex:%s" %(candidate["ChallengeIndex"]))
+                    logger.info("        },")
+                    Candidate.objects.create(epost_proof=epost_proof_obj, partial=candidate["Partial"], sector_id=candidate["SectorID"], challenge_index=candidate["ChallengeIndex"])
+                logger.info("      ],") #end of Candidates
 
             logger.info("  },") #end of EPostProof
 
