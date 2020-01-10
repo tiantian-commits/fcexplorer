@@ -223,7 +223,7 @@ def block_detail(request):
         'ablock': ablock,
         'blmessages': blmessages
     }
-    return render(request, 'block/detail.html', context)
+    return render(request, 'block/block_detail.html', context)
 
 def block_count(request):
     to     = request.GET.get('to')
