@@ -55,7 +55,7 @@ class BlsMessage(models.Model):
     to    = models.CharField(max_length=100)
     _from = models.CharField(max_length=100)
     nonce = models.IntegerField(default=-1)
-    value = models.IntegerField(default=-1)
+    value = models.CharField(max_length=52)
     gas_price  = models.IntegerField(default=-1)
     gas_limit  = models.IntegerField(default=-1)
     method     = models.IntegerField(default=-1)
