@@ -141,7 +141,7 @@ def miner_method_count_line(miner_list, methods, miner_methods):
     # 每种method一条线
     for method in methods:
         y_data = []
-        for miner in miner_list:
+        for miner in miner_methods.keys() :
             y_data.append(miner_methods[miner][method])
 
         line.add_yaxis(
@@ -158,13 +158,20 @@ def miner_method_count_line(miner_list, methods, miner_methods):
 def method_count(miners, methods):
     miner_methods = collections.defaultdict(dict)
     blsMessages   = BlsMessage.objects.all()
+    miner_list    = []
 
     for miner in miners:
+        ignored = True  # ignored method all zero miner.
         for method in methods:
-            miner_methods[miner][method] = len(blsMessages.filter(block__miner=miner, method=method))
+            count = len(blsMessages.filter(block__miner=miner, method=method))
+            if(count > 0):
+                ignored = False
+                miner_methods[miner][method] = count
+        if(False == ignored):
+            miner_list.append(miner)
         #print("miner[%s]  total:%s" %(miner, miner_methods[miner]))
     
-    return miner_methods
+    return miner_list, miner_methods
 
 
 def homepage(request):
@@ -174,8 +181,8 @@ def homepage(request):
     #mychart = line3d()
     methods = [2,3,4,5]
     miners  = Chain.miner_list()[0:100]
-    miner_methods = method_count(miners, methods)
-    method_cout_chart = miner_method_count_line(miners, methods, miner_methods)
+    miner_list, miner_methods = method_count(miners, methods)
+    method_cout_chart = miner_method_count_line(miner_list, methods, miner_methods)
    
     context = {
         'blocks': blocks_list,
