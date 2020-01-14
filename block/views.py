@@ -56,11 +56,12 @@ def block_sync(request):
 
     chain_height = Chain.getChainHeight()
     sync_height  = Block.objects.all().aggregate(Max('height'))["height__max"]
-    logger.info("%d --> %d" %(sync_height, chain_height))
+
     if(None ==  sync_height):
         logger.info("No data has been synced, there are %d data to be synchronized" %(chain_height))
         sync_height = 0
 
+    logger.info("%d --> %d" %(sync_height, chain_height))
     if (chain_height == sync_height):
         logger.info("data is up to date. %d" %(sync_height))
         return block_sync_finished(request)
