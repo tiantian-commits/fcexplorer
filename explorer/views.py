@@ -199,7 +199,7 @@ def miner_method_count(miner, methods):
             if(count > 0):
                 blocks_methods[method].append(count)
                 ignored = False
-                logger.info("blocks_methods[%s][%s]=%d" %(height, method, count))
+                #logger.info("blocks_methods[%s][%s]=%d" %(height, method, count))
 
         if(False == ignored):
             block_height_list.append(str(height))
@@ -209,7 +209,7 @@ def miner_method_count(miner, methods):
             for method in methods:
                 if(len(blocks_methods[method]) < length):
                     blocks_methods[method].append(0)
-                    logger.info("blocks_methods[%s][%s]=%d" %(height, method, 0))
+                    #logger.info("blocks_methods[%s][%s]=%d" %(height, method, 0))
 
     return block_height_list, blocks_methods
 
