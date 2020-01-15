@@ -135,98 +135,36 @@
 									<th colspan="2">
 										<div class="btn-group hashrate-control-container">
 											<a href="javascript:void 0" class="btn control-btn active" data-control="js-realtime-row">实时</a>
-											<a href="javascript:void 0" class="btn control-btn" data-control="js-estimated-row">预估</a>
+											<!-- <a href="javascript:void 0" class="btn control-btn" data-control="js-estimated-row">预估</a> -->
 										</div>
 									</th>
 									<th class="text-right" colspan="2"><span class="js-estimated-row" style="display:none">根据出块数据计算</span></th>
 									<th class="text-right" width="85px">24小时变化</th>
-									<th class="text-right" width="80px">3天幸运值</th>
+									<!-- <th class="text-right" width="80px">3天幸运值</th> -->
 								</tr>
-
+		                        {% for power in power_list %}
 								<tr class="js-realtime-row">
+								<!-- 
 									<td class="text-center geryColor" width="15px" style="vertical-align: middle;padding-right: 8px">
 										1
 									</td>
+								-->
 									<td class="text-left" style="min-width:130px;">
 										<i class="icon-pool icon-pool-poolin"></i>
-										<a target="_blank" href="#">t01475</a>
+										<a target="_blank" href="#">{{ power.0 }}</a>
 									</td>
 									<td width="140px">
 										<div class="progress" style="margin-bottom: 0px;">
-											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 74, 192); width: 75%;">
+											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 74, 192); width: 47%;">
 											</div>
 										</div>
 									</td>
 									<td class="text-right">
 										<span class="geryColor"></span>
 									</td>
-									<td class="text-right">0.75</td>
-									<td class="text-right">75%</td>
+									<td class="text-right">{{ power.1 }}</td>
 								</tr>
-
-								<tr class="js-realtime-row">
-									<td class="text-center geryColor" width="15px" style="vertical-align: middle;padding-right: 8px">
-										2
-									</td>
-									<td class="text-left" style="min-width:130px;">
-										<i class="icon-pool icon-pool-poolin"></i>
-										<a target="_blank" href="#">t01493</a>
-									</td>
-									<td width="140px">
-										<div class="progress" style="margin-bottom: 0px;">
-											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 74, 150); width: 42%;">
-											</div>
-										</div>
-									</td>
-									<td class="text-right">
-										<span class="geryColor"></span>
-									</td>
-									<td class="text-right">0.42</td>
-									<td class="text-right">42%</td>
-								</tr>
-
-								<tr class="js-realtime-row">
-									<td class="text-center geryColor" width="15px" style="vertical-align: middle;padding-right: 8px">
-										3
-									</td>
-									<td class="text-left" style="min-width:130px;">
-										<i class="icon-pool icon-pool-poolin"></i>
-										<a target="_blank" href="#">t01004</a>
-									</td>
-									<td width="140px">
-										<div class="progress" style="margin-bottom: 0px;">
-											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 103, 100); width: 33%;">
-											</div>
-										</div>
-									</td>
-									<td class="text-right">
-										<span class="geryColor"></span>
-									</td>
-									<td class="text-right">0.33</td>
-									<td class="text-right">33%</td>
-								</tr>
-
-								<tr class="js-realtime-row">
-									<td class="text-center geryColor" width="15px" style="vertical-align: middle;padding-right: 8px">
-										4
-									</td>
-									<td class="text-left" style="min-width:130px;">
-										<i class="icon-pool icon-pool-poolin"></i>
-										<a target="_blank" href="#">t06266</a>
-									</td>
-									<td width="140px">
-										<div class="progress" style="margin-bottom: 0px;">
-											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(134, 150, 50); width: 13%;">
-											</div>
-										</div>
-									</td>
-									<td class="text-right">
-										<span class="geryColor"></span>
-									</td>
-									<td class="text-right">0.13</td>
-									<td class="text-right">13%</td>
-								</tr>
-
+		                        {% endfor %}
 
 								</tbody>
 							</table>
@@ -249,7 +187,7 @@
 								<dl>
 									<dt>全网算力</dt>
 									<dd>
-										<span> 48.7 TiB
+										<span> {{ total_power|safe }} TiB
 											<span class="v-help-vsize v-help" data-container="body" data-toggle="popover-hashrate" data-placement="left" data-html="true" data-content="最近&lt;b&gt;一天&lt;/b&gt;平均算力 94.50 EH/s&lt;br&gt;
 			最近&lt;b&gt;三天&lt;/b&gt;平均算力 96.13 EH/s&lt;br&gt;
 			最近&lt;b&gt;七天&lt;/b&gt;平均算力 92.58 EH/s&lt;br&gt;" data-original-title="" title="">

@@ -228,16 +228,18 @@ def method_count(miners, methods):
         if(False == ignored):
             miner_list.append(miner)
     
-    return miner_list, miners_methods
-
+    return miner_list, miners_methods    
 
 def homepage(request):
     blocks_list = Block.objects.all().order_by('-height')[0:10]
 
     methods = [2,3,4,5]
-    miners  = Chain.miner_list()[0:100]
+    miners  = Chain.minerList()[0:1000]
     miner_list, miner_methods = method_count(miners, methods)
     method_cout_chart = method_count_line(miner_list, methods, miner_methods)
+
+    total_power = Chain.totalPower()
+    power_list  = Chain.powerList()
 
     miner  = request.GET.get('miner')
     if None != miner:
@@ -246,12 +248,16 @@ def homepage(request):
 
         context = {
             'blocks': blocks_list,
+            'total_power': total_power,
+            'power_list': power_list,
             'method_cout_chart': method_cout_chart.render_embed(),
             'miner_method_cout_chart': miner_method_cout_chart.render_embed()
         }
     else:
         context = {
             'blocks': blocks_list,
+            'total_power': total_power,
+            'power_list': power_list,
             'method_cout_chart': method_cout_chart.render_embed(),
         }
 

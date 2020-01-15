@@ -1,7 +1,7 @@
 import re
 import os
 
-#import collections
+import collections
 
 from explorer.settings import LOGGING
 import logging
@@ -22,7 +22,16 @@ def write2file(miner, blockInfos, methods):
     f.close()
 
 class Chain:
-    def miner_list():
+    def totalPower():
+        f = os.popen("lotus state power")
+        result = f.read().strip()
+        if len(result) == 0:
+            return 0
+        else:
+            #result = result/(1024*1024*1024*1024)  #TiB
+            return result
+
+    def minerList():
         f = os.popen("lotus state list-miners")
         result = f.read().strip()
         if len(result) == 0:
@@ -31,6 +40,34 @@ class Chain:
             f.close()
 
         return result.split('\n')
+
+    def powerList():
+        miners_power = collections.defaultdict(str)
+
+        # miner_list
+        f = os.popen("lotus state list-miners")
+        result = f.read().strip()
+        if len(result) == 0:
+            f = open("./data/miners.list", "r")
+            result = f.read().strip()
+            f.close()
+
+        miner_list = result.split('\n')[0:100]
+
+        rand = 5 #for debug
+        logger.info("total %d miners." %(len(miner_list)))
+        for miner in miner_list:
+            f = os.popen("lotus state power %s" %(miner))
+            result = f.read().strip()
+            if result != None and result.isdigit() and int(result) > 0:
+                miners_power[miner] = result
+            else: # for debug
+                rand += 11
+                miners_power[miner] = rand         
+
+        miners_power_list = sorted(miners_power.items(),key=lambda x:x[1] ,reverse=True)
+
+        return miners_power_list[0:15]
 
     def getChainHeight():
         f = os.popen("lotus chain list --count 1")
