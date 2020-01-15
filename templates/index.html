@@ -52,12 +52,31 @@
 				</div>
 			</div>
 		</div>
-
+ 
         <div class="row">
 		    <div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">
 	                    {{method_cout_chart|safe}}
 			</div>
 	    </div>
+
+        <div class="row">
+          <div class="searchbar">
+                <div class="searchbar-inner">
+                    <form action="{% url 'homepage' %}" method="GET"  onsubmit="this.search.value = this.search.value.trim()">
+                        <button class="searchbar-submit" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        <div class="searchbar-input-container">
+                            <input type="search" class="searchbar-input" name="miner" placeholder="矿工" autocomplete="off" onfocus="$(this).addClass(&#39;active&#39;)" onblur="this.value.length &gt; 1 || $(this).removeClass(&#39;active&#39;)">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+		    <div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">
+	                    {{miner_method_cout_chart|safe}}
+			</div>
+        </div>	
 	
 		<div class="row">
 			<div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">

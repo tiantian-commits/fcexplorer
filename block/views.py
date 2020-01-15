@@ -8,7 +8,7 @@ from explorer.views import homepage
 from explorer.settings import LOGGING
 import logging
 
-from django.db.models import Max 
+from django.db.models import Max
 from concurrent.futures import ThreadPoolExecutor, wait, ALL_COMPLETED, FIRST_COMPLETED
 
 logging.config.dictConfig(LOGGING)
