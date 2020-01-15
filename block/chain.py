@@ -60,7 +60,7 @@ class Chain:
             f = os.popen("lotus state power %s" %(miner))
             result = f.read().strip()
             if result != None and result.isdigit() and int(result) > 0:
-                miners_power[miner] = result
+                miners_power[miner] = int(result)
             else: # for debug
                 rand += 11
                 miners_power[miner] = rand         
