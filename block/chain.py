@@ -28,7 +28,7 @@ class Chain:
         if len(result) == 0:
             return 0
         else:
-            result = result/(1024*1024*1024*1024)  #TiB
+            result = int(result)/(1024*1024*1024*1024)  #TiB
             return result
 
     def minerList():

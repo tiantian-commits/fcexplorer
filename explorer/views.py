@@ -228,15 +228,41 @@ def method_count(miners, methods):
         if(False == ignored):
             miner_list.append(miner)
     
-    return miner_list, miners_methods    
+    return miner_list, miners_methods
+
+def burstrate():
+    miners_rate = {}#collections.defaultdict(int)
+    blocks_list = Block.objects.all().order_by('-height')[0:50]
+
+    for block in blocks_list:
+#        logger.info("block [%d] miner:%s" %(block.height, block.miner))
+        if block.miner in miners_rate:
+                miners_rate[block.miner] += 1
+#                logger.info("miner:%s rate:%d" %(block.miner, miners_rate[block.miner]))
+        else:
+            miners_rate[block.miner] = 1
+
+    for miner in miners_rate.keys():
+        miners_rate[miner] = miners_rate[miner]/50
+        logger.info("miner:%s rate1:%d" %(miner, miners_rate[miner]))
+
+    rate_list = sorted(miners_rate.items(),key=lambda x:x[1] ,reverse=True)
+
+    length = len(rate_list)
+    if(length > 15):
+        length = 15
+
+    return rate_list[0:length]
 
 def homepage(request):
     blocks_list = Block.objects.all().order_by('-height')[0:10]
 
+    rate_list = burstrate()
+
     methods = [2,3,4,5]
     miners  = Chain.minerList()[0:1000]
     miner_list, miner_methods = method_count(miners, methods)
-    method_cout_chart = method_count_line(miner_list, methods, miner_methods)
+    #method_cout_chart = method_count_line(miner_list, methods, miner_methods)
 
     total_power = Chain.totalPower()
     power_list  = Chain.powerList()
@@ -250,7 +276,8 @@ def homepage(request):
             'blocks': blocks_list,
             'total_power': total_power,
             'power_list': power_list,
-            'method_cout_chart': method_cout_chart.render_embed(),
+            'rate_list': rate_list,
+    #        'method_cout_chart': method_cout_chart.render_embed(),
             'miner_method_cout_chart': miner_method_cout_chart.render_embed()
         }
     else:
@@ -258,7 +285,8 @@ def homepage(request):
             'blocks': blocks_list,
             'total_power': total_power,
             'power_list': power_list,
-            'method_cout_chart': method_cout_chart.render_embed(),
+            'rate_list': rate_list,
+    #        'method_cout_chart': method_cout_chart.render_embed(),
         }
 
     return render(request, 'index.html', context)

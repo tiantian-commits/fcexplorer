@@ -77,7 +77,7 @@
 	                    {{miner_method_cout_chart|safe}}
 			</div>
         </div>	
-	
+<!--	
 		<div class="row">
 			<div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">
 				<div class="panel panel-bm indexPoolShare">
@@ -116,6 +116,37 @@
 					</div>
 				</div>
 			</div>
+-->
+			<div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">
+				<div class="panel panel-bm indexPoolShare">
+					<div class="panel-heading">
+						<div class="panel-heading-title">
+							爆块率排行榜
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="pool-panel pool-panel-share">
+							<table class="table table-condensed">
+								<tbody>	
+		                        {% for rate in rate_list %}
+								<tr class="js-realtime-row">
+									<td class="text-left" style="min-width:130px;">
+										<i class="icon-pool icon-pool-poolin"></i>
+										<a target="_blank" href="#">{{ rate.0 }}</a>
+									</td>
+									<td class="text-right">
+										<span class="geryColor"></span>
+									</td>
+									<td class="text-right">{{ rate.1 }}</td>
+								</tr>
+		                        {% endfor %}
+                                <tr>Filecoin Testnet2，由储迅Filecoin分析引擎驱动</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div class="col-xs-6" style="padding-left: 0; padding-right: 10px;">
 				<div class="panel panel-bm indexPoolShare">
@@ -131,17 +162,19 @@
 						<div class="pool-panel pool-panel-share">
 							<table class="table table-condensed">
 								<tbody>
+								<!-- 
 								<tr>
 									<th colspan="2">
 										<div class="btn-group hashrate-control-container">
 											<a href="javascript:void 0" class="btn control-btn active" data-control="js-realtime-row">实时</a>
-											<!-- <a href="javascript:void 0" class="btn control-btn" data-control="js-estimated-row">预估</a> -->
+											<a href="javascript:void 0" class="btn control-btn" data-control="js-estimated-row">预估</a> 
 										</div>
 									</th>
 									<th class="text-right" colspan="2"><span class="js-estimated-row" style="display:none">根据出块数据计算</span></th>
 									<th class="text-right" width="85px">24小时变化</th>
-									<!-- <th class="text-right" width="80px">3天幸运值</th> -->
-								</tr>
+									 <th class="text-right" width="80px">3天幸运值</th> 
+								</tr> -->
+
 		                        {% for power in power_list %}
 								<tr class="js-realtime-row">
 								<!-- 
@@ -165,7 +198,7 @@
 									<td class="text-right">{{ power.1 }} G</td>
 								</tr>
 		                        {% endfor %}
-
+                                <tr>Filecoin Testnet2，由储迅Filecoin分析引擎驱动</tr>
 								</tbody>
 							</table>
 						</div>
