@@ -28,7 +28,7 @@ class Chain:
         if len(result) == 0:
             return 0
         else:
-            #result = result/(1024*1024*1024*1024)  #TiB
+            result = result/(1024*1024*1024*1024)  #TiB
             return result
 
     def minerList():
@@ -60,14 +60,18 @@ class Chain:
             f = os.popen("lotus state power %s" %(miner))
             result = f.read().strip()
             if result != None and result.isdigit() and int(result) > 0:
-                miners_power[miner] = int(result)
+                miners_power[miner] = int(result)/(1024*1024*1024)
             else: # for debug
                 rand += 11
                 miners_power[miner] = rand         
 
         miners_power_list = sorted(miners_power.items(),key=lambda x:x[1] ,reverse=True)
 
-        return miners_power_list[0:15]
+        length = len(miners_power_list)
+        if(length > 15):
+            length = 15
+
+        return miners_power_list[0:length]
 
     def getChainHeight():
         f = os.popen("lotus chain list --count 1")
