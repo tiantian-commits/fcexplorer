@@ -11,6 +11,7 @@ logger = logging.getLogger('django.request')
 from django.shortcuts import render
 from block.models import Block, Ticket, EPostProof, BlsMessage
 from block.chain import Chain
+from block.miner import MinerInfo
 from django.db.models import Max
 ############################################## demo begin ##########################################
 import math
@@ -257,39 +258,43 @@ def burstrate():
 def homepage(request):
     blocks_list = Block.objects.all().order_by('-height')[0:10]
 
-    rate_list = burstrate()
+    #rate_list = burstrate()
 
     methods = [2,3,4,5]
-    miners  = Chain.minerList()[0:1000]
+    miners  = MinerInfo.minerList()[0:1000]
     miner_list, miner_methods = method_count(miners, methods)
     #method_cout_chart = method_count_line(miner_list, methods, miner_methods)
 
     total_power = Chain.totalPower()
-    power_list  = Chain.powerList()
+    power_list  = MinerInfo.miner_power_list()
 
     miner  = request.GET.get('miner')
     if None != miner:
-        block_height_list, blocks_methods = miner_method_count(miner, methods)
-        miner_method_cout_chart = miner_method_count_line(block_height_list, methods, blocks_methods)
+#        block_height_list, blocks_methods = miner_method_count(miner, methods)
+#        miner_method_cout_chart = miner_method_count_line(block_height_list, methods, blocks_methods)
 
         context = {
             'blocks': blocks_list,
             'total_power': total_power,
             'power_list': power_list,
-            'rate_list': rate_list,
-    #        'method_cout_chart': method_cout_chart.render_embed(),
-            'miner_method_cout_chart': miner_method_cout_chart.render_embed()
+#            'rate_list': rate_list,
+#            'miner_rate_list':miner_rate_list,
+#            'method_cout_chart': method_cout_chart.render_embed(),
+#            'miner_method_cout_chart': miner_method_cout_chart.render_embed()
         }
     else:
         context = {
             'blocks': blocks_list,
             'total_power': total_power,
             'power_list': power_list,
-            'rate_list': rate_list,
-    #        'method_cout_chart': method_cout_chart.render_embed(),
+#            'miner_rate_list':miner_rate_list,
+#            'rate_list': rate_list,
+#            'method_cout_chart': method_cout_chart.render_embed(),
         }
 
     return render(request, 'index.html', context)
 
 
+## run with start
+Chain.block_update()
    

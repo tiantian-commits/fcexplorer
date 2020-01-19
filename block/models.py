@@ -1,6 +1,11 @@
 from django.db import models
 from django.utils import timezone
 
+class Miner(models.Model):
+    id      = models.CharField(primary_key=True, max_length=28)
+    power   = models.IntegerField(default=0)
+    percent = models.IntegerField(default=0)
+
 class Block(models.Model):
     miner         = models.CharField(max_length=100)
     parent_weight = models.IntegerField(default=-1)
